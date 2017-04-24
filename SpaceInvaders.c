@@ -313,22 +313,22 @@ const unsigned short fireball_left[] = {
 // *************************** Capture image dimensions out of BMP**********
 
 //**********************Character Status Typedef****************************
-typedef enum {dead,alive} state;
+typedef enum {dead,alive,open,closed} state;
 typedef enum {still,walking,jumping,climbing_up,climbing_down} moving;
 typedef enum {left,right} direct;
-typedef enum {open,closed} bowserstate;
-typedef struct bauss{
-	bowserstate status;
-} boss;
 typedef struct charac{
 	state status;
 	moving movement;
 	direct direction;
+	uint32_t pastx;
+	uint32_t pasty;
+	uint32_t newx;
+	uint32_t newy;
 } character;
 
 //*******************Character Status***************************************
-boss bowser = {open};
-character mario = {alive,still,right};
+character bowser = {open,still,right,5,40,5,40};
+character mario = {alive,still,right,20,153,20,153};
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -384,9 +384,9 @@ int main(void){
 	}
 
 //initial drawing of mario
-	ST7735_DrawBitmap(20, 153, mario_still_right, 14,20); 
+	ST7735_DrawBitmap(mario.newx, mario.newy, mario_still_right, 14,20); 
 //initial drawing of bowser
-	ST7735_DrawBitmap(5, 40, bowser_closed_mouth, 31,31);
+	ST7735_DrawBitmap(bowser.newx, bowser.newy, bowser_closed_mouth, 31,31);
 
 
 
