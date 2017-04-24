@@ -314,13 +314,21 @@ const unsigned short fireball_left[] = {
 
 //**********************Character Status Typedef****************************
 typedef enum {dead,alive} state;
+typedef enum {still,walking,jumping,climbing_up,climbing_down} moving;
+typedef enum {left,right} direct;
 typedef enum {open,closed} bowserstate;
 typedef struct bauss{
 	bowserstate status;
 } boss;
+typedef struct charac{
+	state status;
+	moving movement;
+	direct direction;
+} character;
 
 //*******************Character Status***************************************
 boss bowser = {open};
+character mario = {alive,still,right};
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -371,6 +379,9 @@ int main(void){
 	ST7735_DrawBitmap(x,45,platform,6,5);
 	}
 //level complete row
+	for(uint32_t i=0,x=50;i<8;i++,x+=6){
+	ST7735_DrawBitmap(x,22,platform,6,5);
+	}
 
 //initial drawing of mario
 	ST7735_DrawBitmap(20, 153, mario_still_right, 14,20); 
@@ -384,12 +395,12 @@ int main(void){
 		if(bowser.status==open){
 			ST7735_DrawBitmap(5, 40, bowser_open_mouth, 31,31);
 			bowser.status=closed;
-			Delay100ms(5);
+			Delay100ms(1);
 		}
 		else{
 			ST7735_DrawBitmap(5, 40, bowser_closed_mouth, 31,31);	
 			bowser.status = open;
-			Delay100ms(5);
+			Delay100ms(1);
 		}
   }
 	/*  ST7735_FillScreen(0x0000);            // set screen to black
