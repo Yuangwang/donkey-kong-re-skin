@@ -57,7 +57,12 @@
 #include "ADC.h"
 #define	 bowser 0
 #define  mario  1
-#define  character_size 2
+#define  fireball1  2
+#define  fireball2  3
+#define  fireball3  4
+#define  fireball4  5
+#define  fireball5  6
+#define  character_size 7
 
 
 
@@ -330,11 +335,48 @@ typedef struct charac{
 	int8_t changex;
 	int8_t changey;
 } character;
-
+typedef struct coord{
+	uint32_t x;
+	uint32_t y;
+} coordinates;
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
 	{mario_still_left,alive,still,right,109,153,109,153,-2,2},		//mario status
+	{fireball_right,alive,walking,right,40,153,40,153,2,0},		//fireball 1 status
+	{fireball_right,dead,walking,right,40,153,40,153,2,0},		//fireball 2 status
+	{fireball_right,dead,walking,right,40,153,40,153,2,0},		//fireball 3 status
+	{fireball_right,dead,walking,right,40,153,40,153,2,0},		//fireball 4 status
+	{fireball_right,dead,walking,right,40,153,40,153,2,0},		//fireball 5 status
+};
+//ladders
+coordinates enemy_ladders_bottom[24]={
+	{20,151},{19,151},{21,151},{74,153},{75,153},{76,153},	//row1
+	{44,118},{45,118},{46,118},{89,117},{90,117},{91,117},	//row2
+	{17,88},{18,88},{19,88},{59,90},{60,90},{61,90},				//row3
+	{41,60},{42,60},{43,60},{101,62},{102,62},{103,62},			//row4
+	//enemies cannot go up to win level
+};
+coordinates player_ladders_bottom[18]={
+	{20,151},{19,151},{21,151},															//row1
+	{44,118},{45,118},{46,118},{89,117},{90,117},{91,117},	//row2
+	{17,88},{18,88},{19,88},																//row3
+	{101,62},{102,62},{103,62},															//row4
+	{69,34},{70,34},{71,34},																//row5
+};
+coordinates enemy_ladders_top[24]={
+	{20,119},{19,119},{21,119},{74,120},{75,120},{76,120},	//row2
+	{44,89},{45,89},{46,89},{89,91},{90,91},{91,91},				//row3
+	{17,63},{18,63},{19,63},{59,61},{60,61},{61,61},				//row4
+	{41,33},{42,33},{43,33},{101,35},{102,35},{103,35},			//row5
+	//enemies cannot go up to win level
+};
+coordinates player_ladders_top[18]={
+	{20,119},{19,119},{21,119},															//row2
+	{44,89},{45,189},{46,89},{89,91},{90,91},{91,91},				//row3
+	{17,63},{18,63},{19,63},																//row4
+	{101,35},{102,35},{103,35},															//row5
+	{69,17},{70,17},{71,17}
 };
 
 //function declarations
@@ -342,6 +384,8 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void Delay100ms(uint32_t count); // time delay in 0.1 seconds
 void Move(uint8_t char_num);
+uint32_t x_ADC_In(void);
+uint32_t y_ADC_In(void);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -456,7 +500,10 @@ int main(void){
 	for(uint32_t i=0,y=60;i<7;i++,y-=3){
 		ST7735_DrawBitmap(102,y,ladder,13,3);
 	}
-
+//win game ladder
+	for(uint32_t i=0,y=34;i<4;i++,y-=3){
+		ST7735_DrawBitmap(70,y,ladder,13,3);
+	}
 
 
 
@@ -471,8 +518,8 @@ int main(void){
 		}
 		Delay100ms(1);
 		Move(mario);
-		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
 		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
+		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
   }
 }
 
@@ -481,6 +528,29 @@ void Move(uint8_t char_num){
 	characters[char_num].pasty = characters[char_num].newy;
 	characters[char_num].newx += characters[char_num].changex;
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
+}
+
+void checkADC (void){
+	uint32_t xADCvalue = x_ADC_In();
+	uint32_t yADCvalue = y_ADC_In();
+	if((xADCvalue<=2200)&&(xADCvalue>=1900)){
+		characters[mario].changex = 0;
+	}
+	if(xADCvalue<1900){
+		characters[mario].changex = -2;
+	}
+	if(xADCvalue>2200){
+		characters[mario].changex = 2;
+	}
+	if((yADCvalue<2200)&&(yADCvalue>1900)){
+		characters[mario].changex = 0;
+	}
+	if(yADCvalue<1900){
+		//checks if it is by a ladder
+	}
+	if(yADCvalue>2200){
+		//checks if it is by a ladder
+	}
 }
 
 // You can use this timer only if you learn how it works
