@@ -340,62 +340,63 @@ int main(void){
 //draw map
 //bottom row
 	for(uint32_t i=0,x=0;i<10;i++,x+=6){
-	ST7735_DrawBitmap(x,158,platform,6,5);
+		ST7735_DrawBitmap(x,158,platform,6,5);
 	}
 	for(uint32_t i=0,x=60;i<6;i++,x+=6){
-	ST7735_DrawBitmap(x,157,platform,6,5);
+		ST7735_DrawBitmap(x,157,platform,6,5);
 	}
 	for(uint32_t i=0,x=96;i<6;i++,x+=6){
-	ST7735_DrawBitmap(x,156,platform,6,5);
+		ST7735_DrawBitmap(x,156,platform,6,5);
 	}
 //2nd row
 	for(uint32_t i=0,x=0;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,114,platform,6,5);
+		ST7735_DrawBitmap(x,114,platform,6,5);
 	}
 	for(uint32_t i=0,x=30;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,115,platform,6,5);
+		ST7735_DrawBitmap(x,115,platform,6,5);
 	}
 	for(uint32_t i=0,x=60;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,116,platform,6,5);
+		ST7735_DrawBitmap(x,116,platform,6,5);
 	}
 	for(uint32_t i=0,x=90;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,117,platform,6,5);
+		ST7735_DrawBitmap(x,117,platform,6,5);
 	}
 //3rd row
 	for(uint32_t i=0,x=12;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,79,platform,6,5);
+		ST7735_DrawBitmap(x,79,platform,6,5);
 	}
 	for(uint32_t i=0,x=42;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,78,platform,6,5);
+		ST7735_DrawBitmap(x,78,platform,6,5);
 	}
 	for(uint32_t i=0,x=72;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,77,platform,6,5);
+		ST7735_DrawBitmap(x,77,platform,6,5);
 	}
 	for(uint32_t i=0,x=102;i<5;i++,x+=6){
-	ST7735_DrawBitmap(x,76,platform,6,5);
+		ST7735_DrawBitmap(x,76,platform,6,5);
 	}
 //top row
 	for(uint32_t i=0,x=0;i<22;i++,x+=6){
-	ST7735_DrawBitmap(x,45,platform,6,5);
+		ST7735_DrawBitmap(x,45,platform,6,5);
 	}
 //level complete row
 	for(uint32_t i=0,x=50;i<8;i++,x+=6){
-	ST7735_DrawBitmap(x,22,platform,6,5);
+		ST7735_DrawBitmap(x,22,platform,6,5);
 	}
 //initial drawing of mario
 	ST7735_DrawBitmap(mario.newx, mario.newy, mario_still_right, 14,20); 
 //initial drawing of bowser
 	ST7735_DrawBitmap(bowser.newx, bowser.newy, bowser.pic, 31,31);
 //ladders
-	for(uint32_t i=0,y=153;i<13;i++,y-=3){
-	ST7735_DrawBitmap(40,y,ladder,13,3);
+	for(uint32_t i=0,y=130;i<5;i++,y-=3){
+		ST7735_DrawBitmap(40,y,ladder,13,3);
 	}
 	for(uint32_t i=0,y=152;i<12;i++,y-=3){
-	ST7735_DrawBitmap(100,y,ladder,13,3);
+		ST7735_DrawBitmap(75,y,ladder,13,3);
 	}
-	for(uint32_t i=0,y=131;i<5;i++,y-=3){
-	ST7735_DrawBitmap(75,y,ladder,13,3);
+	for(uint32_t i=0,y=152;i<12;i++,y-=3){
+		ST7735_DrawBitmap(100,y,ladder,13,3);
 	}
+	
 
 
 
