@@ -34,7 +34,17 @@ void ADC_Init(void){
 // Busy-wait Analog to digital conversion
 // Input: none
 // Output: 12-bit result of ADC conversion
-uint32_t ADC_In(void){  
+uint32_t x_ADC_In(void){  
+  uint32_t data;
+	ADC0_PSSI_R = 0x0008;
+	while ((ADC0_RIS_R&0x08) == 0){
+	}
+	data = ADC0_SSFIFO3_R&0xFFF;
+	ADC0_ISC_R = 0x0008;
+  return data;
+}
+
+uint32_t y_ADC_In(void){  
   uint32_t data;
 	ADC0_PSSI_R = 0x0008;
 	while ((ADC0_RIS_R&0x08) == 0){

@@ -55,11 +55,11 @@
 #include "Random.h"
 #include "TExaS.h"
 #include "ADC.h"
+#define	 bowser 0
+#define  mario  1
+#define  character_size 2
 
 
-void DisableInterrupts(void); // Disable interrupts
-void EnableInterrupts(void);  // Enable interrupts
-void Delay100ms(uint32_t count); // time delay in 0.1 seconds
 
 
 // *************************** Images ***************************
@@ -322,13 +322,21 @@ typedef struct charac{
 	uint32_t pasty;
 	uint32_t newx;
 	uint32_t newy;
-	uint32_t changex;
-	uint32_t changey;
+	int8_t changex;
+	int8_t changey;
 } character;
 
 //*******************Character Status***************************************
-character bowser = {bowser_open_mouth,open,still,right,5,40,5,40,0,0};
-character mario = {mario_still_right,alive,still,right,5,153,5,153,0,0};
+character characters[character_size] = {																	//this array has all of the characters in the game
+	{bowser_open_mouth,open,still,right,5,40,5,40,0,0},				//bowser status
+	{mario_still_right,alive,still,right,5,153,5,153,2,2},		//mario status
+};
+
+//function declarations
+void DisableInterrupts(void); // Disable interrupts
+void EnableInterrupts(void);  // Enable interrupts
+void Delay100ms(uint32_t count); // time delay in 0.1 seconds
+void Move(uint8_t char_num);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -383,9 +391,9 @@ int main(void){
 		ST7735_DrawBitmap(x,22,platform,6,5);
 	}
 //initial drawing of mario
-	ST7735_DrawBitmap(mario.newx, mario.newy, mario_still_right, 14,20); 
+	ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 14,20); 
 //initial drawing of bowser
-	ST7735_DrawBitmap(bowser.newx, bowser.newy, bowser.pic, 31,31);
+	ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 //ladders
 	for(uint32_t i=0,y=130;i<5;i++,y-=3){
 		ST7735_DrawBitmap(40,y,ladder,13,3);
@@ -401,19 +409,27 @@ int main(void){
 
 
   while(1){
-		if(bowser.status==open){
-			bowser.status=closed;
-			bowser.pic = bowser_open_mouth;
+		if(characters[bowser].status==open){
+			characters[bowser].status=closed;
+			characters[bowser].pic = bowser_open_mouth;
 		}
 		else{
-			bowser.status = open;
-			bowser.pic = bowser_closed_mouth;
+			characters[bowser].status = open;
+			characters[bowser].pic = bowser_closed_mouth;
 		}
 		Delay100ms(1);
-		ST7735_DrawBitmap(bowser.newx, bowser.newy, bowser.pic, 31,31);
+		Move(mario);
+		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 14,20); 
+		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
   }
 }
 
+void Move(uint8_t char_num){
+	characters[char_num].pastx = characters[char_num].newx;
+	characters[char_num].pasty = characters[char_num].newy;
+	characters[char_num].newx += characters[char_num].changex;
+	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
+}
 
 // You can use this timer only if you learn how it works
 
