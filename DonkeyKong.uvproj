@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>SpaceInvaders</TargetName>
+      <TargetName>DonkeyKong</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>SpaceInvaders</OutputName>
+          <OutputName>DonkeyKong</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -451,11 +451,6 @@
               <FilePath>.\Print.s</FilePath>
             </File>
             <File>
-              <FileName>SpaceInvaders.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SpaceInvaders.c</FilePath>
-            </File>
-            <File>
               <FileName>ST7735.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\ST7735.c</FilePath>
@@ -464,6 +459,11 @@
               <FileName>tm4c123gh6pm.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\tm4c123gh6pm.h</FilePath>
+            </File>
+            <File>
+              <FileName>DonkeyKong.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DonkeyKong.c</FilePath>
             </File>
           </Files>
         </Group>

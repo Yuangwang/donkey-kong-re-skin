@@ -1,0 +1,33 @@
+Dependencies for Project 'DonkeyKong', Target 'DonkeyKong': (DO NOT MODIFY !)
+F (.\startup.s)(0x58FEEB29)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\random.s)(0x58FEEB29)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary--list .\random.lst --xref -o .\random.o --depend .\random.d)
+F (.\DAC.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\dac.o --omf_browse .\dac.crf --depend .\dac.d)
+F (.\ADC.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\adc.o --omf_browse .\adc.crf --depend .\adc.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (tm4c123gh6pm.h)(0x58FEEB2A)
+F (.\Timer0.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\timer0.o --omf_browse .\timer0.crf --depend .\timer0.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (tm4c123gh6pm.h)(0x58FEEB2A)
+F (.\Timer1.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\timer1.o --omf_browse .\timer1.crf --depend .\timer1.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (tm4c123gh6pm.h)(0x58FEEB2A)
+F (.\Sound.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\sound.o --omf_browse .\sound.crf --depend .\sound.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (Sound.h)(0x58FEEB29)
+I (DAC.h)(0x58FEEB29)
+F (.\LCD.s)(0x58FEEB29)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary--list .\lcd.lst --xref -o .\lcd.o --depend .\lcd.d)
+F (.\Print.s)(0x58FEEB29)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary--list .\print.lst --xref -o .\print.o --depend .\print.d)
+F (.\ST7735.c)(0x58FEEB29)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\st7735.o --omf_browse .\st7735.crf --depend .\st7735.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdio.h)(0x51C88A34)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (ST7735.h)(0x58FEEB29)
+I (tm4c123gh6pm.h)(0x58FEEB2A)
+F (.\tm4c123gh6pm.h)(0x58FEEB2A)()
+F (.\DonkeyKong.c)(0x58FEEB5D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I D:\wei\Documents\ee319k\keil\ARM\RV31\INC-I D:\wei\Documents\ee319k\keil\ARM\CMSIS\Include-I D:\wei\Documents\ee319k\keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\donkeykong.o --omf_browse .\donkeykong.crf --depend .\donkeykong.d)
+I (D:\wei\Documents\ee319k\keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
+I (tm4c123gh6pm.h)(0x58FEEB2A)
+I (ST7735.h)(0x58FEEB29)
+I (Random.h)(0x58FEEB29)
+I (TExaS.h)(0x58FEEB29)
+I (ADC.h)(0x58FEEB29)
+F (.\texas.o)(0x58FEEB29)()
