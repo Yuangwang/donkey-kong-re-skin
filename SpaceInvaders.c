@@ -146,6 +146,7 @@ const unsigned short mario_still_left[] = {
  0xFFFF, 0xA7DF, 0x055B, 0x50D7, 0x50D7, 0x8B7D, 0x8B7D, 0x1011, 0x8410, 0x8410, 0x8410, 0x8410, 0x1011, 0x8B7D, 0xA7DF, 0x8B7D,
  0x8B7D, 0x8B7D, 0x1011, 0x1011, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x8410, 0x1011, 0x1011, 0x1011, 0x1011, 0x1011, 0x8410,
  0x8410, 0x8410, 0x8410, 0x8410,
+
 };
 
 const unsigned short bowser_open_mouth[] = {
@@ -328,8 +329,8 @@ typedef struct charac{
 
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
-	{bowser_open_mouth,open,still,right,5,40,5,40,0,0},				//bowser status
-	{mario_still_right,alive,still,right,5,153,5,153,2,2},		//mario status
+	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
+	{mario_still_right,alive,still,right,109,153,109,153,2,2},		//mario status
 };
 
 //function declarations
@@ -347,44 +348,63 @@ int main(void){
 
 //draw map
 //bottom row
-	for(uint32_t i=0,x=0;i<10;i++,x+=6){
-		ST7735_DrawBitmap(x,158,platform,6,5);
-	}
-	for(uint32_t i=0,x=60;i<6;i++,x+=6){
-		ST7735_DrawBitmap(x,157,platform,6,5);
-	}
-	for(uint32_t i=0,x=96;i<6;i++,x+=6){
+	for(uint32_t i=0,x=0;i<6;i++,x+=6){
 		ST7735_DrawBitmap(x,156,platform,6,5);
 	}
+	for(uint32_t i=0,x=36;i<6;i++,x+=6){
+		ST7735_DrawBitmap(x,157,platform,6,5);
+	}
+	for(uint32_t i=0,x=72;i<10;i++,x+=6){
+		ST7735_DrawBitmap(x,158,platform,6,5);
+	}
 //2nd row
-	for(uint32_t i=0,x=0;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,114,platform,6,5);
-	}
-	for(uint32_t i=0,x=30;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,115,platform,6,5);
-	}
-	for(uint32_t i=0,x=60;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,116,platform,6,5);
-	}
-	for(uint32_t i=0,x=90;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,117,platform,6,5);
-	}
-//3rd row
 	for(uint32_t i=0,x=12;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,79,platform,6,5);
+		ST7735_DrawBitmap(x,124,platform,6,5);
 	}
 	for(uint32_t i=0,x=42;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,78,platform,6,5);
+		ST7735_DrawBitmap(x,123,platform,6,5);
 	}
 	for(uint32_t i=0,x=72;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,77,platform,6,5);
+		ST7735_DrawBitmap(x,122,platform,6,5);
 	}
 	for(uint32_t i=0,x=102;i<5;i++,x+=6){
-		ST7735_DrawBitmap(x,76,platform,6,5);
+		ST7735_DrawBitmap(x,121,platform,6,5);
+	}
+//3rd row
+	for(uint32_t i=0,x=0;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,93,platform,6,5);
+	}
+	for(uint32_t i=0,x=30;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,94,platform,6,5);
+	}
+	for(uint32_t i=0,x=60;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,95,platform,6,5);
+	}
+	for(uint32_t i=0,x=90;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,96,platform,6,5);
+	}
+//4th row
+	for(uint32_t i=0,x=12;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,68,platform,6,5);
+	}
+	for(uint32_t i=0,x=42;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,67,platform,6,5);
+	}
+	for(uint32_t i=0,x=72;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,66,platform,6,5);
+	}
+	for(uint32_t i=0,x=102;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,65,platform,6,5);
 	}
 //top row
-	for(uint32_t i=0,x=0;i<22;i++,x+=6){
-		ST7735_DrawBitmap(x,45,platform,6,5);
+	for(uint32_t i=0,x=0;i<10;i++,x+=6){
+		ST7735_DrawBitmap(x,38,platform,6,5);
+	}
+	for(uint32_t i=0,x=60;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,39,platform,6,5);
+	}
+	for(uint32_t i=0,x=90;i<5;i++,x+=6){
+		ST7735_DrawBitmap(x,40,platform,6,5);
 	}
 //level complete row
 	for(uint32_t i=0,x=50;i<8;i++,x+=6){
@@ -395,16 +415,44 @@ int main(void){
 //initial drawing of bowser
 	ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 //ladders
-	for(uint32_t i=0,y=130;i<5;i++,y-=3){
-		ST7735_DrawBitmap(40,y,ladder,13,3);
+//first row ladders
+	for(uint32_t i=0,y=151;i<9;i++,y-=3){
+		ST7735_DrawBitmap(20,y,ladder,13,3);
 	}
-	for(uint32_t i=0,y=152;i<12;i++,y-=3){
+	for(uint32_t i=0,y=128;i<2;i++,y-=3){
 		ST7735_DrawBitmap(75,y,ladder,13,3);
 	}
-	for(uint32_t i=0,y=152;i<12;i++,y-=3){
-		ST7735_DrawBitmap(100,y,ladder,13,3);
+	for(uint32_t i=0,y=153;i<5;i++,y-=3){
+		ST7735_DrawBitmap(75,y,ladder,13,3);
 	}
-	
+//second row ladders
+	for(uint32_t i=0,y=118;i<8;i++,y-=3){
+		ST7735_DrawBitmap(45,y,ladder,13,3);
+	}
+	for(uint32_t i=0,y=117;i<7;i++,y-=3){
+		ST7735_DrawBitmap(90,y,ladder,13,3);
+	}
+//third row ladders
+	for(uint32_t i=0,y=88;i<7;i++,y-=3){
+		ST7735_DrawBitmap(18,y,ladder,13,3);
+	}
+	for(uint32_t i=0,y=90;i<3;i++,y-=3){
+		ST7735_DrawBitmap(60,y,ladder,13,3);
+	}
+	for(uint32_t i=0,y=75;i<3;i++,y-=3){
+		ST7735_DrawBitmap(60,y,ladder,13,3);
+	}
+//fourth row ladders
+	for(uint32_t i=0,y=50;i<4;i++,y-=3){
+		ST7735_DrawBitmap(42,y,ladder,13,3);
+	}
+	for(uint32_t i=0,y=62;i<2;i++,y-=3){
+		ST7735_DrawBitmap(42,y,ladder,13,3);
+	}
+	for(uint32_t i=0,y=60;i<7;i++,y-=3){
+		ST7735_DrawBitmap(102,y,ladder,13,3);
+	}
+
 
 
 
