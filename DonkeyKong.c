@@ -386,6 +386,7 @@ void Delay100ms(uint32_t count); // time delay in 0.1 seconds
 void Move(uint8_t char_num);
 uint32_t x_ADC_In(void);
 uint32_t y_ADC_In(void);
+void checkADC (void);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -508,13 +509,34 @@ int main(void){
 
 
   while(1){
-		if(characters[bowser].status==open){
+//bowser animation
+/*		if(characters[bowser].status==open){
 			characters[bowser].status=closed;
 			characters[bowser].pic = bowser_open_mouth;
 		}
 		else{
 			characters[bowser].status = open;
 			characters[bowser].pic = bowser_closed_mouth;
+		}
+*/	
+		checkADC();
+		if(characters[mario].movement==climbing_up){
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+					characters[mario].movement = still;
+					characters[mario].changey = 0;
+				}
+				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
+			}
+		}
+		if(characters[mario].movement==climbing_down){
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
+					characters[mario].movement = still;
+					characters[mario].changey = 0;
+				}
+			}
+			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
 		}
 		Delay100ms(1);
 		Move(mario);
@@ -542,14 +564,26 @@ void checkADC (void){
 	if(xADCvalue>2200){
 		characters[mario].changex = 2;
 	}
-	if((yADCvalue<2200)&&(yADCvalue>1900)){
-		characters[mario].changex = 0;
+	if((yADCvalue<3000)&&(yADCvalue>1000)){
+		characters[mario].changey = 0;
 	}
-	if(yADCvalue<1900){
-		//checks if it is by a ladder
+	if(yADCvalue<1000){
+		for(uint16_t i=0;i<18;i++){
+			if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+				characters[mario].changex = 0;
+				characters[mario].changey = -1;
+				characters[mario].movement = climbing_down;
+			}
+		}
 	}
-	if(yADCvalue>2200){
-		//checks if it is by a ladder
+	if(yADCvalue>3000){
+		for(uint16_t i=0;i<18;i++){
+			if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+				characters[mario].changex = 0;
+				characters[mario].changey = 1;
+				characters[mario].movement = climbing_up;
+			}
+		}
 	}
 }
 
