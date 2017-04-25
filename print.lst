@@ -213,9 +213,8 @@ ARM Macro Assembler    Page 4
                                                              aligned
   169 00000158                 END                          ; end of file
 Command Line: --debug --xref --cpu=Cortex-M4 --apcs=interwork --depend=.\print.
-d -o.\print.o -ID:\wei\Documents\ee319k\keil\ARM\RV31\INC -ID:\wei\Documents\ee
-319k\keil\ARM\CMSIS\Include -ID:\wei\Documents\ee319k\keil\ARM\Inc\Luminary --p
-redefine="__EVAL SETA 1" --list=.\print.lst Print.s
+d -o.\print.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\
+Inc\Luminary --list=.\print.lst Print.s
 
 
 
@@ -394,4 +393,4 @@ Symbol: ST7735_OutString
       None
 Comment: ST7735_OutString unused
 2 symbols
-347 symbols in table
+346 symbols in table
