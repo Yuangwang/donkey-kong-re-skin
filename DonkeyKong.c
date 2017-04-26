@@ -391,11 +391,12 @@ void checkADC (void);
 void checkFirePos(void);
 void draw_Stage1(void);
 void draw_init_characters(void);
+void ADC_Init(void);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
   Random_Init(1);
-
+	ADC_Init();
   Output_Init();
   ST7735_FillScreen(0x0000);            // set screen to black
 	draw_Stage1();
@@ -417,7 +418,7 @@ int main(void){
 		Delay100ms(1);
 		checkFirePos();
 		ST7735_DrawBitmap(characters[fireball1].newx, characters[fireball1].newy, characters[fireball1].pic, 8,8);
-	/*	checkADC();
+		checkADC();
 		
 		if(characters[mario].movement==climbing_up){
 			for(uint16_t i=0;i<18;i++){
@@ -441,7 +442,7 @@ int main(void){
 		Move(mario);
 		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
-  */}
+  }
 }
 
 void Move(uint8_t char_num){
