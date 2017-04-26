@@ -342,7 +342,7 @@ typedef struct coord{
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
-	{mario_still_left,alive,still,right,109,153,109,153,-2,2},		//mario status
+	{mario_still_left,alive,still,right,109,153,109,153,-1,1},		//mario status
 	{fireball_right,alive,walking,right,30,10,30,20,1,1},		//fireball 1 status
 	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 2 status
 	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 3 status
@@ -404,7 +404,7 @@ int main(void){
 	
   while(1){
 //bowser animation
-/*		if(characters[bowser].status==open){
+		if(characters[bowser].status==open){
 			characters[bowser].status=closed;
 			characters[bowser].pic = bowser_open_mouth;
 		}
@@ -412,10 +412,10 @@ int main(void){
 			characters[bowser].status = open;
 			characters[bowser].pic = bowser_closed_mouth;
 		}
-*/	
+	
 		
 		
-		Delay100ms(1);
+//		Delay100ms(1);
 		checkFirePos();
 		ST7735_DrawBitmap(characters[fireball1].newx, characters[fireball1].newy, characters[fireball1].pic, 8,8);
 		checkADC();
