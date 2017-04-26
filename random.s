@@ -21,7 +21,7 @@ M      SPACE   4
        EXPORT  Random32
 Random_Init
        LDR R2,=M       ; R4 = &M, R4 points to M
-       MOV R0,#1       ; Initial seed
+;      MOV R0,#1       ; Initial seed
        STR R0,[R2]     ; M=1
        BX  LR
 ;------------Random32------------
