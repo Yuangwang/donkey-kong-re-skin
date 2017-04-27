@@ -663,12 +663,30 @@ void checkADC (void){
 	uint32_t yADCvalue = y_ADC_In();
 	if((xADCvalue<=3000)&&(xADCvalue>=1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 0;
+		if((characters[mario].pastx)<(characters[mario].newx)){
+			characters[mario].pic = mario_still_right;
+		}
+		if((characters[mario].pastx)>(characters[mario].newx)){
+			characters[mario].pic = mario_still_left;
+		}
 	}
 	if((xADCvalue<1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = -2;
+		if(characters[mario].pic!=mario_run_left){
+			characters[mario].pic=mario_run_left;
+		}
+		else{
+			characters[mario].pic=mario_still_left;
+		}
 	}
 	if((xADCvalue>3000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 2;
+		if(characters[mario].pic!=mario_run_right){
+			characters[mario].pic=mario_run_right;
+		}
+		else{
+			characters[mario].pic=mario_still_right;
+		}
 	}
 	if((yADCvalue<3000)&&(yADCvalue>1000)){
 		characters[mario].changey = 0;
