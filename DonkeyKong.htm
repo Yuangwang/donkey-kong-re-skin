@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\DonkeyKong.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\DonkeyKong.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Wed Apr 26 23:57:11 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Thu Apr 27 00:44:47 2017
 <BR><P>
 <H3>Maximum Stack Usage =         96 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -971,13 +971,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a7]"></a>checkFirePos</STRONG> (Thumb, 804 bytes, Stack size 16 bytes, donkeykong.o(i.checkFirePos))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
+<P><STRONG><a name="[a7]"></a>checkFirePos</STRONG> (Thumb, 1128 bytes, Stack size 24 bytes, donkeykong.o(i.checkFirePos))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = checkFirePos
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Moveright
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Moveleft
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Movedown
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;x_ADC_In
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Random
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Random_Init
 </UL>
@@ -1002,7 +1003,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[89]"></a>main</STRONG> (Thumb, 292 bytes, Stack size 8 bytes, donkeykong.o(i.main))
+<P><STRONG><a name="[89]"></a>main</STRONG> (Thumb, 294 bytes, Stack size 8 bytes, donkeykong.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = main &rArr; Output_Init &rArr; ST7735_InitR &rArr; ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
@@ -1023,7 +1024,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a5]"></a>x_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.x_ADC_In))
-<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkFirePos
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 
 <P><STRONG><a name="[a6]"></a>y_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.y_ADC_In))

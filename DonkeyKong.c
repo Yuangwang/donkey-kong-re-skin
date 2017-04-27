@@ -344,10 +344,10 @@ character characters[character_size] = {																	//this array has all of
 	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
 	{mario_still_left,alive,still,right,109,153,109,153,0,0},		//mario status
 	{fireball_right,alive,walking,right,30,10,30,20,1,1},		//fireball 1 status
-	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 2 status
-	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 3 status
-	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 4 status
-	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 5 status
+	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 2 status
+	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 3 status
+	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 4 status
+	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 5 status
 };
 //ladders
 coordinates enemy_ladders_bottom[24]={
@@ -388,7 +388,7 @@ void Movedown(uint8_t char_num);
 uint32_t x_ADC_In(void);
 uint32_t y_ADC_In(void);
 void checkADC (void);
-void checkFirePos(void);
+void checkFirePos(uint8_t firenum);
 void draw_Stage1(void);
 void draw_init_characters(void);
 void ADC_Init(void);
@@ -415,7 +415,7 @@ int main(void){
 	
 		
 		
-		checkFirePos();
+		checkFirePos(fireball1);
 		ST7735_DrawBitmap(characters[fireball1].newx, characters[fireball1].newy, characters[fireball1].pic, 8,8);
 		checkADC();
 		
@@ -471,181 +471,181 @@ void Moveup(uint8_t char_num){	//moves down
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
 }
 uint32_t downTest;
-void checkFirePos (void){
+void checkFirePos (uint8_t firenum){
 	uint8_t not_Move = 1;	 //tracks if a move was done
 	for(uint8_t i = 0; i < 24 ; i++){	//Check if the fireball should go down ladder
-		if((characters[fireball1].newx == enemy_ladders_top[i].x) && (characters[fireball1].newy == enemy_ladders_top[i].y)){
-				Random_Init(1);
+		if((characters[firenum].newx == enemy_ladders_top[i].x) && (characters[fireball1].newy == enemy_ladders_top[i].y)){
+				Random_Init(x_ADC_In()*5);
 				downTest = Random();
 				if(downTest > 127){
-				Movedown(fireball1);
+					Movedown(firenum);
 				}			
 		}
 	}
 	
 	//bottom row 
-	if(characters[fireball1].newy == 151){
+	if(characters[firenum].newy == 151){
 		for( uint8_t x = 0 ; x < 36; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 152){
+	if(characters[firenum].newy == 152){
 		for( uint8_t x = 36 ; x < 72; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 153){
+	if(characters[firenum].newy == 153){
 		for( uint8_t x = 72 ; x < 132; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
 	//2nd row 
-	if(characters[fireball1].newy == 119){
+	if(characters[firenum].newy == 119){
 		for( uint8_t x = 4 ; x < 42; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 118){
+	if(characters[firenum].newy == 118){
 		for( uint8_t x = 42 ; x < 72; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 117){
+	if(characters[firenum].newy == 117){
 		for( uint8_t x = 72 ; x < 102; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 116){
+	if(characters[firenum].newy == 116){
 		for( uint8_t x = 102 ; x < 132; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
 	//3rd row
-	if(characters[fireball1].newy == 88){
+	if(characters[firenum].newy == 88){
 		for( uint8_t x = 0 ; x < 30; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 89){
+	if(characters[firenum].newy == 89){
 		for( uint8_t x = 30 ; x < 60; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 90){
+	if(characters[firenum].newy == 90){
 		for( uint8_t x = 60 ; x < 90; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 91){
+	if(characters[firenum].newy == 91){
 		for( uint8_t x = 90 ; x < 120; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
 	//4th row
-	if(characters[fireball1].newy == 63){
+	if(characters[firenum].newy == 63){
 		for( uint8_t x = 4 ; x < 42; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 62){
+	if(characters[firenum].newy == 62){
 		for( uint8_t x = 42 ; x < 72; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 61){
+	if(characters[firenum].newy == 61){
 		for( uint8_t x = 72 ; x < 102; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 60){
+	if(characters[firenum].newy == 60){
 		for( uint8_t x = 102 ; x < 132; x++){
-			if( characters[fireball1].newx == x){
-				Moveleft(fireball1);
+			if( characters[firenum].newx == x){
+				Moveleft(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
 	//top row
-	if(characters[fireball1].newy == 33){
+	if(characters[firenum].newy == 33){
 		for( uint8_t x = 0 ; x < 60; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 				
 			}
 		}
 	}
-	if(characters[fireball1].newy == 34){
+	if(characters[firenum].newy == 34){
 		for( uint8_t x = 60 ; x < 90; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
 		}
 	}
-	if(characters[fireball1].newy == 35){
+	if(characters[firenum].newy == 35){
 		for( uint8_t x = 90 ; x < 120; x++){
-			if( characters[fireball1].newx == x){
-				Moveright(fireball1);
+			if( characters[firenum].newx == x){
+				Moveright(firenum);
 				not_Move = 0;
 				break;
 			}
@@ -653,7 +653,7 @@ void checkFirePos (void){
 	}	
 	
 	if (not_Move){
-		Movedown(fireball1);
+		Movedown(firenum);
 	}
 }
 	
