@@ -342,7 +342,7 @@ typedef struct coord{
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
-	{mario_still_left,alive,still,right,109,153,109,153,-1,1},		//mario status
+	{mario_still_left,alive,still,right,109,153,109,153,0,0},		//mario status
 	{fireball_right,alive,walking,right,30,10,30,20,1,1},		//fireball 1 status
 	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 2 status
 	{fireball_right,dead,walking,right,36,5,36,5,2,0},		//fireball 3 status
@@ -415,7 +415,6 @@ int main(void){
 	
 		
 		
-//		Delay100ms(1);
 		checkFirePos();
 		ST7735_DrawBitmap(characters[fireball1].newx, characters[fireball1].newy, characters[fireball1].pic, 8,8);
 		checkADC();
@@ -471,12 +470,13 @@ void Moveup(uint8_t char_num){	//moves down
 	characters[char_num].pasty = characters[char_num].newy;
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
 }
+uint32_t downTest;
 void checkFirePos (void){
 	uint8_t not_Move = 1;	 //tracks if a move was done
 	for(uint8_t i = 0; i < 24 ; i++){	//Check if the fireball should go down ladder
 		if((characters[fireball1].newx == enemy_ladders_top[i].x) && (characters[fireball1].newy == enemy_ladders_top[i].y)){
 				Random_Init(1);
-				uint32_t downTest = Random();
+				downTest = Random();
 				if(downTest > 127){
 				Movedown(fireball1);
 				}			
@@ -661,13 +661,13 @@ void checkFirePos (void){
 void checkADC (void){
 	uint32_t xADCvalue = x_ADC_In();
 	uint32_t yADCvalue = y_ADC_In();
-	if((xADCvalue<=2200)&&(xADCvalue>=1900)){
+	if((xADCvalue<=3000)&&(xADCvalue>=1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 0;
 	}
-	if(xADCvalue<1900){
+	if((xADCvalue<1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = -2;
 	}
-	if(xADCvalue>2200){
+	if((xADCvalue>3000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 2;
 	}
 	if((yADCvalue<3000)&&(yADCvalue>1000)){
