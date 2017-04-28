@@ -340,6 +340,7 @@ typedef struct charac{
 	uint32_t newy;
 	int8_t changex;
 	int8_t changey;
+	uint32_t miny;
 } character;
 typedef struct coord{
 	uint32_t x;
@@ -348,7 +349,7 @@ typedef struct coord{
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_closed_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
-	{mario_still_left,alive,still,right,109,153,109,153,0,0},		//mario status
+	{mario_still_left,alive,still,right,109,153,109,153,0,0,153},		//mario status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 1 status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 2 status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 3 status
@@ -403,6 +404,8 @@ void draw_Stage1(void);
 void draw_init_characters(void);
 void ADC_Init(void);
 void draw_Ladder1(void);
+void mario_platform_left(void);
+void mario_platform_right(void);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -444,6 +447,11 @@ int main(void){
 		Delay100ms(1);
 		draw_Stage1();	//layering stage behind mario
 		Move(mario);
+		//checks if mario is on platform
+		if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
+			characters[mario].pasty = characters[mario].newy;
+			characters[mario].newy = characters[mario].miny;
+		}
 		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
 		//picks when a new fireball will show up
@@ -715,16 +723,7 @@ void checkADC (void){
 		else{
 			characters[mario].pic=mario_still_left;
 		}
-		if(characters[mario].newx == 72){
-			for( uint8_t y = 158; y > 124; y--){
-					characters[mario].newx++;
-			}
-		}
-		if(characters[mario].newx == 36){
-			for( uint8_t y = 157; y > 125; y--){
-					characters[mario].newx++;
-			}
-		}		
+		mario_platform_left();
 	}
 	if((xADCvalue<1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 2;
@@ -734,17 +733,8 @@ void checkADC (void){
 		else{
 			characters[mario].pic=mario_still_right;
 		}
-		if(characters[mario].newx == 72){
-			for( uint8_t y = 158; y > 124; y--){
-					characters[mario].newx--;
-			}
-		}
-		if(characters[mario].newx == 36){
-			for( uint8_t y = 157; y > 125; y--){
-					characters[mario].newx--;
-			}
-		}			
-	}
+		mario_platform_right();
+	}	
 	if((yADCvalue<3000)&&(yADCvalue>1000)){
 		characters[mario].changey = 0;
 	}
@@ -766,6 +756,44 @@ void checkADC (void){
 			}
 		}
 	}
+}
+
+void mario_platform_left(void){
+	if(characters[mario].newx == 73){
+			for( uint8_t y = 158; y > 124; y--){
+				if(characters[mario].newy==y){	
+					characters[mario].pasty = characters[mario].newy;
+					characters[mario].miny--;
+				}
+			}
+		}
+		if(characters[mario].newx == 37){
+			for( uint8_t y = 158; y > 125; y--){
+				if(characters[mario].newy==y){
+					characters[mario].pasty = characters[mario].newy;
+					characters[mario].miny--;
+				}
+			}
+		}
+}
+
+void mario_platform_right(void){
+	if(characters[mario].newx == 73){
+			for( uint8_t y = 158; y > 124; y--){
+				if(characters[mario].newy==y){	
+					characters[mario].pasty = characters[mario].newy;
+					characters[mario].miny++;
+				}
+			}
+		}
+		if(characters[mario].newx == 37){
+			for( uint8_t y = 158; y > 125; y--){
+				if(characters[mario].newy==y){
+					characters[mario].pasty = characters[mario].newy;
+					characters[mario].miny++;
+				}
+			}
+		}
 }
 
 //Draws the ladders and platforms
