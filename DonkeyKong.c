@@ -62,7 +62,13 @@
 #define  fireball3  4
 #define  fireball4  5
 #define  fireball5  6
-#define  character_size 7
+#define  fireball6  7
+#define  fireball7  8
+#define  fireball8  9
+#define  fireball9  10
+#define  fireball10  11
+#define  fireball11  12
+#define  character_size 13
 
 
 
@@ -341,13 +347,19 @@ typedef struct coord{
 } coordinates;
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
-	{bowser_open_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
+	{bowser_closed_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
 	{mario_still_left,alive,still,right,109,153,109,153,0,0},		//mario status
-	{fireball_right,alive,walking,right,30,10,30,20,1,1},		//fireball 1 status
-	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 2 status
-	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 3 status
-	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 4 status
-	{fireball_right,dead,walking,right,30,10,30,20,1,1},		//fireball 5 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 1 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 2 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 3 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 4 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 5 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 6 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 7 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 8 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 9 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 10 status
+	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 11 status
 };
 //ladders
 coordinates enemy_ladders_bottom[24]={
@@ -385,40 +397,32 @@ void EnableInterrupts(void);  // Enable interrupts
 void Delay100ms(uint32_t count); // time delay in 0.1 seconds
 void Move(uint8_t char_num);
 void Movedown(uint8_t char_num);
-uint32_t x_ADC_In(void);
-uint32_t y_ADC_In(void);
 void checkADC (void);
-void checkFirePos(uint8_t firenum);
+void update_Fire(uint8_t firenum);
 void draw_Stage1(void);
 void draw_init_characters(void);
 void ADC_Init(void);
+void draw_Ladder1(void);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
-  Random_Init(1);
 	ADC_Init();
   Output_Init();
   ST7735_FillScreen(0x0000);            // set screen to black
 	draw_Stage1();
 	draw_init_characters();
-	
+	uint8_t fireball_wait = 0;	//delay for next fireball
+	uint8_t fireball_ref = 2;	//reference to which fireball
   while(1){
-//bowser animation
-		if(characters[bowser].status==open){
-			characters[bowser].status=closed;
-			characters[bowser].pic = bowser_open_mouth;
+	//fireballs fire one by one
+		for(uint8_t fireball = 2; fireball < 13; fireball++){
+			if(characters[fireball].status == alive){
+				update_Fire(fireball);
+				ST7735_DrawBitmap(characters[fireball].newx, characters[fireball].newy, characters[fireball].pic, 8,8);
+			}
 		}
-		else{
-			characters[bowser].status = open;
-			characters[bowser].pic = bowser_closed_mouth;
-		}
-	
-		
-		
-		checkFirePos(fireball1);
-		ST7735_DrawBitmap(characters[fireball1].newx, characters[fireball1].newy, characters[fireball1].pic, 8,8);
-		checkADC();
-		
+		//mario movement
+		checkADC();		
 		if(characters[mario].movement==climbing_up){
 			for(uint16_t i=0;i<18;i++){
 				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
@@ -438,12 +442,23 @@ int main(void){
 			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
 		}
 		Delay100ms(1);
+		draw_Stage1();	//layering stage behind mario
 		Move(mario);
 		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
-  }
+		//picks when a new fireball will show up
+		fireball_wait++ ;
+		if(fireball_wait == 75){
+			fireball_wait = 0;
+			if(fireball_ref == 10){
+				fireball_ref = 2;
+			}
+			fireball_ref++;
+			characters[fireball_ref].status = alive;
+			characters[bowser].pic = bowser_open_mouth;
+		}
+	}
 }
-
 void Move(uint8_t char_num){
 	characters[char_num].pastx = characters[char_num].newx;
 	characters[char_num].pasty = characters[char_num].newy;
@@ -470,14 +485,13 @@ void Moveup(uint8_t char_num){	//moves down
 	characters[char_num].pasty = characters[char_num].newy;
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
 }
-uint32_t downTest;
-void checkFirePos (uint8_t firenum){
+uint8_t fireball_animation = 0;
+void update_Fire (uint8_t firenum){
 	uint8_t not_Move = 1;	 //tracks if a move was done
 	for(uint8_t i = 0; i < 24 ; i++){	//Check if the fireball should go down ladder
-		if((characters[firenum].newx == enemy_ladders_top[i].x) && (characters[fireball1].newy == enemy_ladders_top[i].y)){
+		if((characters[firenum].newx == enemy_ladders_top[i].x) && (characters[firenum].newy == enemy_ladders_top[i].y)){
 				Random_Init(x_ADC_In()*5);
-				downTest = Random();
-				if(downTest > 127){
+				if(Random() > 127){
 					Movedown(firenum);
 				}			
 		}
@@ -488,6 +502,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 0 ; x < 36; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -497,6 +512,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 36 ; x < 72; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -506,6 +522,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 72 ; x < 132; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -516,6 +533,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 4 ; x < 42; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -525,6 +543,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 42 ; x < 72; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -534,6 +553,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 72 ; x < 102; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -543,6 +563,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 102 ; x < 132; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -553,6 +574,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 0 ; x < 30; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -562,6 +584,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 30 ; x < 60; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -571,6 +594,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 60 ; x < 90; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -580,6 +604,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 90 ; x < 120; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -590,6 +615,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 4 ; x < 42; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -599,6 +625,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 42 ; x < 72; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -608,6 +635,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 72 ; x < 102; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -617,6 +645,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 102 ; x < 132; x++){
 			if( characters[firenum].newx == x){
 				Moveleft(firenum);
+				characters[firenum].pic = fireball_left;
 				not_Move = 0;
 				break;
 			}
@@ -627,7 +656,9 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 0 ; x < 60; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
+				characters[bowser].pic = bowser_closed_mouth;	//closes bowsers mouth after fireball comes out
 				break;
 				
 			}
@@ -637,6 +668,7 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 60 ; x < 90; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
@@ -646,18 +678,23 @@ void checkFirePos (uint8_t firenum){
 		for( uint8_t x = 90 ; x < 120; x++){
 			if( characters[firenum].newx == x){
 				Moveright(firenum);
+				characters[firenum].pic = fireball_right;
 				not_Move = 0;
 				break;
 			}
 		}
 	}	
+	if(characters[firenum].newy == 153 && characters[firenum].newx == 132){
+		characters[firenum].newy = 20;
+		characters[firenum].newx = 30;
+	}
 	
 	if (not_Move){
 		Movedown(firenum);
 	}
 }
 	
-
+//movement controls for mario
 void checkADC (void){
 	uint32_t xADCvalue = x_ADC_In();
 	uint32_t yADCvalue = y_ADC_In();
@@ -670,7 +707,7 @@ void checkADC (void){
 			characters[mario].pic = mario_still_left;
 		}
 	}
-	if((xADCvalue<1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
+	if((xADCvalue>3000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = -2;
 		if(characters[mario].pic!=mario_run_left){
 			characters[mario].pic=mario_run_left;
@@ -678,8 +715,18 @@ void checkADC (void){
 		else{
 			characters[mario].pic=mario_still_left;
 		}
+		if(characters[mario].newx == 72){
+			for( uint8_t y = 158; y > 124; y--){
+					characters[mario].newx++;
+			}
+		}
+		if(characters[mario].newx == 36){
+			for( uint8_t y = 157; y > 125; y--){
+					characters[mario].newx++;
+			}
+		}		
 	}
-	if((xADCvalue>3000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
+	if((xADCvalue<1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 2;
 		if(characters[mario].pic!=mario_run_right){
 			characters[mario].pic=mario_run_right;
@@ -687,6 +734,16 @@ void checkADC (void){
 		else{
 			characters[mario].pic=mario_still_right;
 		}
+		if(characters[mario].newx == 72){
+			for( uint8_t y = 158; y > 124; y--){
+					characters[mario].newx--;
+			}
+		}
+		if(characters[mario].newx == 36){
+			for( uint8_t y = 157; y > 125; y--){
+					characters[mario].newx--;
+			}
+		}			
 	}
 	if((yADCvalue<3000)&&(yADCvalue>1000)){
 		characters[mario].changey = 0;
@@ -776,7 +833,9 @@ void draw_Stage1(void){
 	for(uint32_t i=0,x=50;i<8;i++,x+=6){
 		ST7735_DrawBitmap(x,22,platform,6,5);
 	}
-	//ladders
+	draw_Ladder1();
+}
+void draw_Ladder1(void){
 //first row ladders
 	for(uint32_t i=0,y=151;i<9;i++,y-=3){
 		ST7735_DrawBitmap(20,y,ladder,13,3);
@@ -829,10 +888,11 @@ void draw_init_characters(void){
 }
 // You can use this timer only if you learn how it works
 
+	
 void Delay100ms(uint32_t count){
 	uint32_t volatile time;
   while(count>0){
-    time = 27240;  // 0.1sec at 80 MHz
+    time = 227240;  // 0.1sec at 80 MHz
     while(time){
 	  	time--;
     }
