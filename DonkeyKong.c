@@ -346,6 +346,7 @@ typedef struct coord{
 	uint32_t x;
 	uint32_t y;
 } coordinates;
+uint8_t lose = 0;
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_closed_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
@@ -406,6 +407,7 @@ void ADC_Init(void);
 void draw_Ladder1(void);
 void mario_platform_left(void);
 void mario_platform_right(void);
+void fireball_collision(uint8_t firenum);
 
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
@@ -416,7 +418,7 @@ int main(void){
 	draw_init_characters();
 	uint8_t fireball_wait = 0;	//delay for next fireball
 	uint8_t fireball_ref = 2;	//reference to which fireball
-  while(1){
+  while(!lose){
 	//fireballs fire one by one
 		for(uint8_t fireball = 2; fireball < 13; fireball++){
 			if(characters[fireball].status == alive){
@@ -465,6 +467,9 @@ int main(void){
 			characters[fireball_ref].status = alive;
 			characters[bowser].pic = bowser_open_mouth;
 		}
+		for(uint8_t fireball = 2; fireball < 13; fireball++){
+			fireball_collision(fireball);
+		}
 	}
 }
 void Move(uint8_t char_num){
@@ -492,6 +497,29 @@ void Moveup(uint8_t char_num){	//moves down
 	characters[char_num].pastx = characters[char_num].newx;
 	characters[char_num].pasty = characters[char_num].newy;
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
+}
+
+void fireball_collision(uint8_t firenum){
+	for(uint8_t x = characters[firenum].newx; x < (characters[firenum].newx + 8); x++){
+		for(uint8_t y = characters[firenum].newy; y < (characters[firenum].newy +8); y++){
+			if((characters[mario].newx == x) && (characters[mario].newy == y)){
+				ST7735_FillScreen(0x0000);	//replace with game over screen
+				lose = 1;
+			}
+			if((characters[mario].newx + 14 == x) && (characters[mario].newy == y)){
+				ST7735_FillScreen(0x0000);	//replace with game over screen
+				lose = 1;
+			}
+			if((characters[mario].newx == x) && (characters[mario].newy + 19 == y)){
+				ST7735_FillScreen(0x0000);	//replace with game over screen
+				lose = 1;
+			}
+			if((characters[mario].newx + 14 == x) && (characters[mario].newy + 19 == y )){
+				ST7735_FillScreen(0x0000);	//replace with game over screen
+				lose = 1;
+			}
+		}
+	}
 }
 uint8_t fireball_animation = 0;
 void update_Fire (uint8_t firenum){

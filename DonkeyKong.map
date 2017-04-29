@@ -130,6 +130,8 @@ Section Cross References
     donkeykong.o(i.draw_Stage1) refers to donkeykong.o(.constdata) for platform
     donkeykong.o(i.draw_init_characters) refers to st7735.o(i.ST7735_DrawBitmap) for ST7735_DrawBitmap
     donkeykong.o(i.draw_init_characters) refers to donkeykong.o(.data) for characters
+    donkeykong.o(i.fireball_collision) refers to st7735.o(i.ST7735_FillScreen) for ST7735_FillScreen
+    donkeykong.o(i.fireball_collision) refers to donkeykong.o(.data) for characters
     donkeykong.o(i.main) refers to texas.o(.text) for TExaS_Init
     donkeykong.o(i.main) refers to adc.o(i.ADC_Init) for ADC_Init
     donkeykong.o(i.main) refers to st7735.o(i.Output_Init) for Output_Init
@@ -141,6 +143,7 @@ Section Cross References
     donkeykong.o(i.main) refers to donkeykong.o(i.checkADC) for checkADC
     donkeykong.o(i.main) refers to donkeykong.o(i.Delay100ms) for Delay100ms
     donkeykong.o(i.main) refers to donkeykong.o(i.Move) for Move
+    donkeykong.o(i.main) refers to donkeykong.o(i.fireball_collision) for fireball_collision
     donkeykong.o(i.main) refers to donkeykong.o(.data) for characters
     donkeykong.o(i.main) refers to donkeykong.o(.constdata) for bowser_open_mouth
     donkeykong.o(i.mario_platform_left) refers to donkeykong.o(.data) for characters
@@ -319,51 +322,51 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
     ../clib/angel/dczerorl2.s                0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
@@ -457,23 +460,24 @@ Image Symbol Table
     i.draw_Ladder1                           0x000011a8   Section        0  donkeykong.o(i.draw_Ladder1)
     i.draw_Stage1                            0x00001318   Section        0  donkeykong.o(i.draw_Stage1)
     i.draw_init_characters                   0x00001560   Section        0  donkeykong.o(i.draw_init_characters)
-    i.main                                   0x000015b4   Section        0  donkeykong.o(i.main)
-    i.mario_platform_left                    0x00001748   Section        0  donkeykong.o(i.mario_platform_left)
-    i.mario_platform_right                   0x000019d8   Section        0  donkeykong.o(i.mario_platform_right)
-    i.setAddrWindow                          0x00001c58   Section        0  st7735.o(i.setAddrWindow)
-    setAddrWindow                            0x00001c59   Thumb Code   106  st7735.o(i.setAddrWindow)
-    i.update_Fire                            0x00001ccc   Section        0  donkeykong.o(i.update_Fire)
-    i.x_ADC_In                               0x00002194   Section        0  adc.o(i.x_ADC_In)
-    i.y_ADC_In                               0x000021c0   Section        0  adc.o(i.y_ADC_In)
-    .constdata                               0x000021ec   Section     2018  st7735.o(.constdata)
-    Font                                     0x000021ec   Data        1275  st7735.o(.constdata)
-    Bcmd                                     0x000026e7   Data         103  st7735.o(.constdata)
-    Rcmd1                                    0x0000274e   Data          59  st7735.o(.constdata)
-    Rcmd2green                               0x00002789   Data          13  st7735.o(.constdata)
-    Rcmd2red                                 0x00002796   Data          13  st7735.o(.constdata)
-    Rcmd3                                    0x000027a3   Data          43  st7735.o(.constdata)
-    .constdata                               0x000029ce   Section     6638  donkeykong.o(.constdata)
-    .constdata                               0x000043bc   Section      240  texas.o(.constdata)
+    i.fireball_collision                     0x000015b4   Section        0  donkeykong.o(i.fireball_collision)
+    i.main                                   0x00001674   Section        0  donkeykong.o(i.main)
+    i.mario_platform_left                    0x00001828   Section        0  donkeykong.o(i.mario_platform_left)
+    i.mario_platform_right                   0x00001ab8   Section        0  donkeykong.o(i.mario_platform_right)
+    i.setAddrWindow                          0x00001d38   Section        0  st7735.o(i.setAddrWindow)
+    setAddrWindow                            0x00001d39   Thumb Code   106  st7735.o(i.setAddrWindow)
+    i.update_Fire                            0x00001dac   Section        0  donkeykong.o(i.update_Fire)
+    i.x_ADC_In                               0x00002274   Section        0  adc.o(i.x_ADC_In)
+    i.y_ADC_In                               0x000022a0   Section        0  adc.o(i.y_ADC_In)
+    .constdata                               0x000022cc   Section     2018  st7735.o(.constdata)
+    Font                                     0x000022cc   Data        1275  st7735.o(.constdata)
+    Bcmd                                     0x000027c7   Data         103  st7735.o(.constdata)
+    Rcmd1                                    0x0000282e   Data          59  st7735.o(.constdata)
+    Rcmd2green                               0x00002869   Data          13  st7735.o(.constdata)
+    Rcmd2red                                 0x00002876   Data          13  st7735.o(.constdata)
+    Rcmd3                                    0x00002883   Data          43  st7735.o(.constdata)
+    .constdata                               0x00002aae   Section     6638  donkeykong.o(.constdata)
+    .constdata                               0x0000449c   Section      240  texas.o(.constdata)
     .data                                    0x20000000   Section        4  timer0.o(.data)
     .data                                    0x20000004   Section        4  timer1.o(.data)
     .data                                    0x20000008   Section       44  st7735.o(.data)
@@ -483,10 +487,10 @@ Image Symbol Table
     RowStart                                 0x2000001d   Data           1  st7735.o(.data)
     Rotation                                 0x2000001e   Data           1  st7735.o(.data)
     TabColor                                 0x2000001f   Data           1  st7735.o(.data)
-    .data                                    0x20000034   Section     1089  donkeykong.o(.data)
-    .data                                    0x20000478   Section       48  texas.o(.data)
-    DATA                                     0x200004a8   Section        4  random.o(DATA)
-    M                                        0x200004a8   Data           4  random.o(DATA)
+    .data                                    0x20000034   Section     1093  donkeykong.o(.data)
+    .data                                    0x2000047c   Section       48  texas.o(.data)
+    DATA                                     0x200004ac   Section        4  random.o(DATA)
+    M                                        0x200004ac   Data           4  random.o(DATA)
     .bss                                     0x200004b0   Section       56  texas.o(.bss)
     .bss                                     0x200004e8   Section       96  libspace.o(.bss)
     HEAP                                     0x20000548   Section        0  startup.o(HEAP)
@@ -755,31 +759,32 @@ Image Symbol Table
     draw_Ladder1                             0x000011a9   Thumb Code   364  donkeykong.o(i.draw_Ladder1)
     draw_Stage1                              0x00001319   Thumb Code   578  donkeykong.o(i.draw_Stage1)
     draw_init_characters                     0x00001561   Thumb Code    80  donkeykong.o(i.draw_init_characters)
-    main                                     0x000015b5   Thumb Code   386  donkeykong.o(i.main)
-    mario_platform_left                      0x00001749   Thumb Code   652  donkeykong.o(i.mario_platform_left)
-    mario_platform_right                     0x000019d9   Thumb Code   636  donkeykong.o(i.mario_platform_right)
-    update_Fire                              0x00001ccd   Thumb Code  1214  donkeykong.o(i.update_Fire)
-    x_ADC_In                                 0x00002195   Thumb Code    36  adc.o(i.x_ADC_In)
-    y_ADC_In                                 0x000021c1   Thumb Code    36  adc.o(i.y_ADC_In)
-    dBfs                                     0x000027ce   Data         512  st7735.o(.constdata)
-    mario_run_right                          0x000029ce   Data         600  donkeykong.o(.constdata)
-    mario_run_left                           0x00002c26   Data         600  donkeykong.o(.constdata)
-    mario_still_right                        0x00002e7e   Data         600  donkeykong.o(.constdata)
-    mario_still_left                         0x000030d6   Data         600  donkeykong.o(.constdata)
-    bowser_open_mouth                        0x0000332e   Data        1922  donkeykong.o(.constdata)
-    bowser_closed_mouth                      0x00003ab0   Data        1922  donkeykong.o(.constdata)
-    ladder                                   0x00004232   Data          78  donkeykong.o(.constdata)
-    platform                                 0x00004280   Data          60  donkeykong.o(.constdata)
-    fireball_right                           0x000042bc   Data         128  donkeykong.o(.constdata)
-    fireball_left                            0x0000433c   Data         128  donkeykong.o(.constdata)
-    InputPortMsg                             0x000043bc   Data          40  texas.o(.constdata)
-    OutputPortMsg                            0x000043e4   Data          40  texas.o(.constdata)
-    BlankMsg                                 0x0000440c   Data          40  texas.o(.constdata)
-    InitializedMsg                           0x00004434   Data          40  texas.o(.constdata)
-    IntroMsg                                 0x0000445c   Data          40  texas.o(.constdata)
-    DoneMsg                                  0x00004484   Data          40  texas.o(.constdata)
-    Region$$Table$$Base                      0x000044ac   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x000044cc   Number         0  anon$$obj.o(Region$$Table)
+    fireball_collision                       0x000015b5   Thumb Code   182  donkeykong.o(i.fireball_collision)
+    main                                     0x00001675   Thumb Code   416  donkeykong.o(i.main)
+    mario_platform_left                      0x00001829   Thumb Code   652  donkeykong.o(i.mario_platform_left)
+    mario_platform_right                     0x00001ab9   Thumb Code   636  donkeykong.o(i.mario_platform_right)
+    update_Fire                              0x00001dad   Thumb Code  1214  donkeykong.o(i.update_Fire)
+    x_ADC_In                                 0x00002275   Thumb Code    36  adc.o(i.x_ADC_In)
+    y_ADC_In                                 0x000022a1   Thumb Code    36  adc.o(i.y_ADC_In)
+    dBfs                                     0x000028ae   Data         512  st7735.o(.constdata)
+    mario_run_right                          0x00002aae   Data         600  donkeykong.o(.constdata)
+    mario_run_left                           0x00002d06   Data         600  donkeykong.o(.constdata)
+    mario_still_right                        0x00002f5e   Data         600  donkeykong.o(.constdata)
+    mario_still_left                         0x000031b6   Data         600  donkeykong.o(.constdata)
+    bowser_open_mouth                        0x0000340e   Data        1922  donkeykong.o(.constdata)
+    bowser_closed_mouth                      0x00003b90   Data        1922  donkeykong.o(.constdata)
+    ladder                                   0x00004312   Data          78  donkeykong.o(.constdata)
+    platform                                 0x00004360   Data          60  donkeykong.o(.constdata)
+    fireball_right                           0x0000439c   Data         128  donkeykong.o(.constdata)
+    fireball_left                            0x0000441c   Data         128  donkeykong.o(.constdata)
+    InputPortMsg                             0x0000449c   Data          40  texas.o(.constdata)
+    OutputPortMsg                            0x000044c4   Data          40  texas.o(.constdata)
+    BlankMsg                                 0x000044ec   Data          40  texas.o(.constdata)
+    InitializedMsg                           0x00004514   Data          40  texas.o(.constdata)
+    IntroMsg                                 0x0000453c   Data          40  texas.o(.constdata)
+    DoneMsg                                  0x00004564   Data          40  texas.o(.constdata)
+    Region$$Table$$Base                      0x0000458c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000045ac   Number         0  anon$$obj.o(Region$$Table)
     PeriodicTask0                            0x20000000   Data           4  timer0.o(.data)
     PeriodicTask1                            0x20000004   Data           4  timer1.o(.data)
     StX                                      0x20000008   Data           4  st7735.o(.data)
@@ -791,23 +796,24 @@ Image Symbol Table
     Ymin                                     0x20000028   Data           4  st7735.o(.data)
     X                                        0x2000002c   Data           4  st7735.o(.data)
     Yrange                                   0x20000030   Data           4  st7735.o(.data)
-    characters                               0x20000034   Data         416  donkeykong.o(.data)
-    enemy_ladders_bottom                     0x200001d4   Data         192  donkeykong.o(.data)
-    player_ladders_bottom                    0x20000294   Data         144  donkeykong.o(.data)
-    enemy_ladders_top                        0x20000324   Data         192  donkeykong.o(.data)
-    player_ladders_top                       0x200003e4   Data         144  donkeykong.o(.data)
-    fireball_animation                       0x20000474   Data           1  donkeykong.o(.data)
-    TExaS_Period                             0x20000478   Data           4  texas.o(.data)
-    TExaS_Ports                              0x2000047c   Data           8  texas.o(.data)
-    TExaS_Meter                              0x20000484   Data           4  texas.o(.data)
-    ADCnum                                   0x20000488   Data           4  texas.o(.data)
-    LastMode                                 0x2000048c   Data           4  texas.o(.data)
-    bFlag                                    0x20000490   Data           4  texas.o(.data)
-    Count                                    0x20000494   Data           4  texas.o(.data)
-    DelayBetweenTests                        0x20000498   Data           4  texas.o(.data)
-    TExaS_Test                               0x2000049c   Data           4  texas.o(.data)
-    ScopeMode                                0x200004a0   Data           4  texas.o(.data)
-    ScopeCount                               0x200004a4   Data           4  texas.o(.data)
+    lose                                     0x20000034   Data           1  donkeykong.o(.data)
+    characters                               0x20000038   Data         416  donkeykong.o(.data)
+    enemy_ladders_bottom                     0x200001d8   Data         192  donkeykong.o(.data)
+    player_ladders_bottom                    0x20000298   Data         144  donkeykong.o(.data)
+    enemy_ladders_top                        0x20000328   Data         192  donkeykong.o(.data)
+    player_ladders_top                       0x200003e8   Data         144  donkeykong.o(.data)
+    fireball_animation                       0x20000478   Data           1  donkeykong.o(.data)
+    TExaS_Period                             0x2000047c   Data           4  texas.o(.data)
+    TExaS_Ports                              0x20000480   Data           8  texas.o(.data)
+    TExaS_Meter                              0x20000488   Data           4  texas.o(.data)
+    ADCnum                                   0x2000048c   Data           4  texas.o(.data)
+    LastMode                                 0x20000490   Data           4  texas.o(.data)
+    bFlag                                    0x20000494   Data           4  texas.o(.data)
+    Count                                    0x20000498   Data           4  texas.o(.data)
+    DelayBetweenTests                        0x2000049c   Data           4  texas.o(.data)
+    TExaS_Test                               0x200004a0   Data           4  texas.o(.data)
+    ScopeMode                                0x200004a4   Data           4  texas.o(.data)
+    ScopeCount                               0x200004a8   Data           4  texas.o(.data)
     TExaS                                    0x200004b0   Data          56  texas.o(.bss)
     __libspace_start                         0x200004e8   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000548   Data           0  libspace.o(.bss)
@@ -820,69 +826,69 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00004978, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000045d8])
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00004a5c, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000046b8])
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x000044cc, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x000045ac, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000008   Code   RO          557  * !!!main             c_w.l(__main.o)
-    0x0000028c   0x00000034   Code   RO          713    !!!scatter          c_w.l(__scatter.o)
-    0x000002c0   0x0000005a   Code   RO          711    !!dczerorl2         c_w.l(__dczerorl2.o)
+    0x00000284   0x00000008   Code   RO          563  * !!!main             c_w.l(__main.o)
+    0x0000028c   0x00000034   Code   RO          719    !!!scatter          c_w.l(__scatter.o)
+    0x000002c0   0x0000005a   Code   RO          717    !!dczerorl2         c_w.l(__dczerorl2.o)
     0x0000031a   0x00000002   PAD
-    0x0000031c   0x0000001c   Code   RO          715    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x00000338   0x00000002   Code   RO          584    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x0000033a   0x00000000   Code   RO          591    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          594    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          596    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          598    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          601    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          603    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          605    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          607    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          609    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          611    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          613    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          615    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          617    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          619    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          621    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          625    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          627    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          629    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x0000033a   0x00000000   Code   RO          631    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x0000033a   0x00000002   Code   RO          632    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
-    0x0000033c   0x00000002   Code   RO          652    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0000033e   0x00000000   Code   RO          666    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
-    0x0000033e   0x00000000   Code   RO          669    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
-    0x0000033e   0x00000000   Code   RO          672    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
-    0x0000033e   0x00000000   Code   RO          674    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
-    0x0000033e   0x00000000   Code   RO          677    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
-    0x0000033e   0x00000002   Code   RO          678    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x00000340   0x00000000   Code   RO          559    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
-    0x00000340   0x00000000   Code   RO          561    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
-    0x00000340   0x00000006   Code   RO          573    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
-    0x00000346   0x00000000   Code   RO          563    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
-    0x00000346   0x00000004   Code   RO          564    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
-    0x0000034a   0x00000000   Code   RO          566    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
-    0x0000034a   0x00000008   Code   RO          567    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
-    0x00000352   0x00000002   Code   RO          588    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000354   0x00000000   Code   RO          634    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000354   0x00000004   Code   RO          635    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000358   0x00000006   Code   RO          636    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x0000031c   0x0000001c   Code   RO          721    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x00000338   0x00000002   Code   RO          590    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x0000033a   0x00000000   Code   RO          597    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          600    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          602    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          604    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          607    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          609    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          611    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          613    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          615    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          617    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          619    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          621    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          623    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          625    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          627    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          631    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          633    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          635    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x0000033a   0x00000000   Code   RO          637    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x0000033a   0x00000002   Code   RO          638    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
+    0x0000033c   0x00000002   Code   RO          658    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0000033e   0x00000000   Code   RO          672    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
+    0x0000033e   0x00000000   Code   RO          675    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
+    0x0000033e   0x00000000   Code   RO          678    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
+    0x0000033e   0x00000000   Code   RO          680    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
+    0x0000033e   0x00000000   Code   RO          683    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
+    0x0000033e   0x00000002   Code   RO          684    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x00000340   0x00000000   Code   RO          565    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
+    0x00000340   0x00000000   Code   RO          567    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
+    0x00000340   0x00000006   Code   RO          579    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
+    0x00000346   0x00000000   Code   RO          569    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
+    0x00000346   0x00000004   Code   RO          570    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
+    0x0000034a   0x00000000   Code   RO          572    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
+    0x0000034a   0x00000008   Code   RO          573    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
+    0x00000352   0x00000002   Code   RO          594    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000354   0x00000000   Code   RO          640    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000354   0x00000004   Code   RO          641    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000358   0x00000006   Code   RO          642    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000035e   0x00000002   PAD
     0x00000360   0x00000030   Code   RO            4    .text               startup.o
     0x00000390   0x0000003c   Code   RO           13    .text               random.o
     0x000003cc   0x0000004c   Code   RO          161    .text               lcd.o
-    0x00000418   0x000004a0   Code   RO          536    .text               texas.o
-    0x000008b8   0x00000006   Code   RO          555    .text               c_w.l(heapauxi.o)
-    0x000008be   0x0000004a   Code   RO          575    .text               c_w.l(sys_stackheap_outer.o)
-    0x00000908   0x0000000c   Code   RO          577    .text               c_w.l(exit.o)
-    0x00000914   0x00000008   Code   RO          585    .text               c_w.l(libspace.o)
-    0x0000091c   0x0000000c   Code   RO          644    .text               c_w.l(sys_exit.o)
-    0x00000928   0x00000002   Code   RO          655    .text               c_w.l(use_no_semi.o)
-    0x0000092a   0x00000000   Code   RO          657    .text               c_w.l(indicate_semi.o)
+    0x00000418   0x000004a0   Code   RO          542    .text               texas.o
+    0x000008b8   0x00000006   Code   RO          561    .text               c_w.l(heapauxi.o)
+    0x000008be   0x0000004a   Code   RO          581    .text               c_w.l(sys_stackheap_outer.o)
+    0x00000908   0x0000000c   Code   RO          583    .text               c_w.l(exit.o)
+    0x00000914   0x00000008   Code   RO          591    .text               c_w.l(libspace.o)
+    0x0000091c   0x0000000c   Code   RO          650    .text               c_w.l(sys_exit.o)
+    0x00000928   0x00000002   Code   RO          661    .text               c_w.l(use_no_semi.o)
+    0x0000092a   0x00000000   Code   RO          663    .text               c_w.l(indicate_semi.o)
     0x0000092a   0x00000002   PAD
     0x0000092c   0x000000d8   Code   RO           20    i.ADC_Init          adc.o
     0x00000a04   0x00000020   Code   RO          439    i.Delay100ms        donkeykong.o
@@ -906,39 +912,39 @@ Memory Map of the image
     0x000011a8   0x00000170   Code   RO          446    i.draw_Ladder1      donkeykong.o
     0x00001318   0x00000248   Code   RO          447    i.draw_Stage1       donkeykong.o
     0x00001560   0x00000054   Code   RO          448    i.draw_init_characters  donkeykong.o
-    0x000015b4   0x00000194   Code   RO          449    i.main              donkeykong.o
-    0x00001748   0x00000290   Code   RO          450    i.mario_platform_left  donkeykong.o
-    0x000019d8   0x00000280   Code   RO          451    i.mario_platform_right  donkeykong.o
-    0x00001c58   0x00000074   Code   RO          209    i.setAddrWindow     st7735.o
-    0x00001ccc   0x000004c8   Code   RO          452    i.update_Fire       donkeykong.o
-    0x00002194   0x0000002c   Code   RO           21    i.x_ADC_In          adc.o
-    0x000021c0   0x0000002c   Code   RO           22    i.y_ADC_In          adc.o
-    0x000021ec   0x000007e2   Data   RO          211    .constdata          st7735.o
-    0x000029ce   0x000019ee   Data   RO          453    .constdata          donkeykong.o
-    0x000043bc   0x000000f0   Data   RO          538    .constdata          texas.o
-    0x000044ac   0x00000020   Data   RO          709    Region$$Table       anon$$obj.o
+    0x000015b4   0x000000c0   Code   RO          449    i.fireball_collision  donkeykong.o
+    0x00001674   0x000001b4   Code   RO          450    i.main              donkeykong.o
+    0x00001828   0x00000290   Code   RO          451    i.mario_platform_left  donkeykong.o
+    0x00001ab8   0x00000280   Code   RO          452    i.mario_platform_right  donkeykong.o
+    0x00001d38   0x00000074   Code   RO          209    i.setAddrWindow     st7735.o
+    0x00001dac   0x000004c8   Code   RO          453    i.update_Fire       donkeykong.o
+    0x00002274   0x0000002c   Code   RO           21    i.x_ADC_In          adc.o
+    0x000022a0   0x0000002c   Code   RO           22    i.y_ADC_In          adc.o
+    0x000022cc   0x000007e2   Data   RO          211    .constdata          st7735.o
+    0x00002aae   0x000019ee   Data   RO          454    .constdata          donkeykong.o
+    0x0000449c   0x000000f0   Data   RO          544    .constdata          texas.o
+    0x0000458c   0x00000020   Data   RO          715    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x20000000, Size: 0x000004ac, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000010c])
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x000004b0, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000010c])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   0x00000004   Data   RW           52    .data               timer0.o
     0x20000004   0x00000004   Data   RW           73    .data               timer1.o
     0x20000008   0x0000002c   Data   RW          212    .data               st7735.o
-    0x20000034   0x00000441   Data   RW          454    .data               donkeykong.o
-    0x20000475   0x00000003   PAD
-    0x20000478   0x00000030   Data   RW          539    .data               texas.o
-    0x200004a8   0x00000004   Data   RW           12    DATA                random.o
+    0x20000034   0x00000445   Data   RW          455    .data               donkeykong.o
+    0x20000479   0x00000003   PAD
+    0x2000047c   0x00000030   Data   RW          545    .data               texas.o
+    0x200004ac   0x00000004   Data   RW           12    DATA                random.o
 
 
-    Execution Region ER_ZI (Base: 0x200004ac, Size: 0x0000049c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Base: 0x200004b0, Size: 0x00000498, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x200004ac   0x00000004   PAD
-    0x200004b0   0x00000038   Zero   RW          537    .bss                texas.o
-    0x200004e8   0x00000060   Zero   RW          586    .bss                c_w.l(libspace.o)
+    0x200004b0   0x00000038   Zero   RW          543    .bss                texas.o
+    0x200004e8   0x00000060   Zero   RW          592    .bss                c_w.l(libspace.o)
     0x20000548   0x00000000   Zero   RW            2    HEAP                startup.o
     0x20000548   0x00000400   Zero   RW            1    STACK               startup.o
 
@@ -952,7 +958,7 @@ Image component sizes
 
        304         44          0          0          0       4073   adc.o
          0          0          0          0          0       1444   dac.o
-      4692        126       6638       1089          0      15652   donkeykong.o
+      4916        138       6638       1093          0      16450   donkeykong.o
         76         14          0          0          0        216   lcd.o
         60         14          0          4          0        216   random.o
       1290        126       2018         44          0       9542   st7735.o
@@ -962,9 +968,9 @@ Image component sizes
         24          8          0          4          0        886   timer1.o
 
     ----------------------------------------------------------------------
-      8348       1160       8928       1196       1084      48515   Object Totals
+      8572       1172       8928       1200       1080      49313   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         2          0          0          3          4          0   (incl. Padding)
+         2          0          0          3          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1011,15 +1017,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8684       1176       8928       1196       1180      47323   Grand Totals
-      8684       1176       8928        268       1180      47323   ELF Image Totals (compressed)
-      8684       1176       8928        268          0          0   ROM Totals
+      8908       1188       8928       1200       1176      48069   Grand Totals
+      8908       1188       8928        268       1176      48069   ELF Image Totals (compressed)
+      8908       1188       8928        268          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                17612 (  17.20kB)
+    Total RO  Size (Code + RO Data)                17836 (  17.42kB)
     Total RW  Size (RW Data + ZI Data)              2376 (   2.32kB)
-    Total ROM Size (Code + RO Data + RW Data)      17880 (  17.46kB)
+    Total ROM Size (Code + RO Data + RW Data)      18104 (  17.68kB)
 
 ==============================================================================
 
