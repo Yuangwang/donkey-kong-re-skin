@@ -388,7 +388,7 @@ coordinates enemy_ladders_top[24]={
 };
 coordinates player_ladders_top[18]={
 	{20,119},{19,119},{21,119},															//row2
-	{44,89},{45,189},{46,89},{89,91},{90,91},{91,91},				//row3
+	{44,89},{45,89},{46,89},{89,91},{90,91},{91,91},				//row3
 	{17,63},{18,63},{19,63},																//row4
 	{101,35},{102,35},{103,35},															//row5
 	{69,17},{70,17},{71,17}
@@ -730,24 +730,36 @@ void checkADC (void){
 		}
 		mario_platform_right();
 	}	
-	if((yADCvalue<3000)&&(yADCvalue>1000)){
+	if((yADCvalue<3700)&&(yADCvalue>1000)){
 		characters[mario].changey = 0;
 	}
 	if(yADCvalue<1000){
-		for(uint16_t i=0;i<18;i++){
-			if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
-				characters[mario].changex = 0;
-				characters[mario].changey = -1;
-				characters[mario].movement = climbing_down;
+		if((characters[mario].movement==climbing_down)||(characters[mario].movement==climbing_up)){
+			characters[mario].movement=climbing_down;
+			characters[mario].changey = -1;
+		}
+		else{
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+					characters[mario].changex = 0;
+					characters[mario].changey = -1;
+					characters[mario].movement = climbing_down;
+				}
 			}
 		}
 	}
-	if(yADCvalue>3000){
-		for(uint16_t i=0;i<18;i++){
-			if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
-				characters[mario].changex = 0;
-				characters[mario].changey = 1;
-				characters[mario].movement = climbing_up;
+	if(yADCvalue>3700){
+		if((characters[mario].movement==climbing_down)||(characters[mario].movement==climbing_up)){
+			characters[mario].movement=climbing_up;
+			characters[mario].changey = 1;
+		}
+		else{
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
+					characters[mario].changex = 0;
+					characters[mario].changey = 1;
+					characters[mario].movement = climbing_up;
+				}
 			}
 		}
 	}
@@ -1118,6 +1130,7 @@ void SysTick_Handler(void){
 				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
 					characters[mario].movement = still;
 					characters[mario].changey = 0;
+					characters[mario].miny = player_ladders_top[i].y;
 				}
 				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
 			}
@@ -1127,6 +1140,7 @@ void SysTick_Handler(void){
 				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
 					characters[mario].movement = still;
 					characters[mario].changey = 0;
+					characters[mario].miny = player_ladders_bottom[i].y;
 				}
 			}
 		}
