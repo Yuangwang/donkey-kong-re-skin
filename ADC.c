@@ -30,7 +30,7 @@ void ADC_Init(void){
 	ADC0_ACTSS_R |= 0x0008;	//enable selected sequencer 3
 	
 //	init for second ADC sequencer 2 in channel 9 PE4
-	ADC0_ACTSS_R &= ~0X04;	//Disables sequencer for the init
+/*	ADC0_ACTSS_R &= ~0X04;	//Disables sequencer for the init
 	ADC0_EMUX_R &= ~0x0F00;	//set software start for sequencer 2
 	ADC0_SSMUX2_R &= ~0x0F;	
 	ADC0_SSMUX2_R += 9;	//set channel 9
@@ -39,7 +39,7 @@ void ADC_Init(void){
 	ADC0_ACTSS_R |= 0x04;	//enable selected sequencer 2
 	
 	ADC0_SAC_R= 0x04;
-
+*/
 }
 
 //------------ADC_In------------
@@ -58,10 +58,10 @@ uint32_t x_ADC_In(void){
 
 uint32_t y_ADC_In(void){  
   uint32_t data;
-	ADC0_PSSI_R = 0x0004;
-	while ((ADC0_RIS_R&0x04) == 0){
+	ADC0_PSSI_R = 0x0008;
+	while ((ADC0_RIS_R&0x08) == 0){
 	}
 	data = ADC0_SSFIFO3_R&0xFFF;
-	ADC0_ISC_R = 0x0004;
+	ADC0_ISC_R = 0x0008;
   return data;
 }

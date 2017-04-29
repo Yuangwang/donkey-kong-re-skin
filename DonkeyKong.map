@@ -1,4 +1,4 @@
-ARM Linker, 5.03 [Build 76] [MDK-ARM Professional]
+ARM Linker, 5.03 [Build 76] [MDK-ARM Lite]
 
 ==============================================================================
 
@@ -435,45 +435,45 @@ Image Symbol Table
     .text                                    0x00000928   Section        2  use_no_semi.o(.text)
     .text                                    0x0000092a   Section        0  indicate_semi.o(.text)
     i.ADC_Init                               0x0000092c   Section        0  adc.o(i.ADC_Init)
-    i.Delay100ms                             0x00000a5c   Section        0  donkeykong.o(i.Delay100ms)
-    i.Delay1ms                               0x00000a80   Section        0  st7735.o(i.Delay1ms)
-    i.Move                                   0x00000aa0   Section        0  donkeykong.o(i.Move)
-    i.Movedown                               0x00000b00   Section        0  donkeykong.o(i.Movedown)
-    i.Moveleft                               0x00000b44   Section        0  donkeykong.o(i.Moveleft)
-    i.Moveright                              0x00000b88   Section        0  donkeykong.o(i.Moveright)
-    i.Output_Init                            0x00000bcc   Section        0  st7735.o(i.Output_Init)
-    i.ST7735_DrawBitmap                      0x00000bdc   Section        0  st7735.o(i.ST7735_DrawBitmap)
-    i.ST7735_FillRect                        0x00000cfc   Section        0  st7735.o(i.ST7735_FillRect)
-    i.ST7735_FillScreen                      0x00000da8   Section        0  st7735.o(i.ST7735_FillScreen)
-    i.ST7735_InitR                           0x00000dcc   Section        0  st7735.o(i.ST7735_InitR)
-    i.ST7735_SetCursor                       0x00000e48   Section        0  st7735.o(i.ST7735_SetCursor)
-    i.Timer0A_Handler                        0x00000e68   Section        0  timer0.o(i.Timer0A_Handler)
-    i.Timer1A_Handler                        0x00000e80   Section        0  timer1.o(i.Timer1A_Handler)
-    i.checkADC                               0x00000e98   Section        0  donkeykong.o(i.checkADC)
-    i.commandList                            0x00001028   Section        0  st7735.o(i.commandList)
-    commandList                              0x00001029   Thumb Code    86  st7735.o(i.commandList)
-    i.commonInit                             0x00001080   Section        0  st7735.o(i.commonInit)
-    commonInit                               0x00001081   Thumb Code   340  st7735.o(i.commonInit)
-    i.draw_Ladder1                           0x00001204   Section        0  donkeykong.o(i.draw_Ladder1)
-    i.draw_Stage1                            0x00001374   Section        0  donkeykong.o(i.draw_Stage1)
-    i.draw_init_characters                   0x000015bc   Section        0  donkeykong.o(i.draw_init_characters)
-    i.main                                   0x00001610   Section        0  donkeykong.o(i.main)
-    i.mario_platform_left                    0x000017a4   Section        0  donkeykong.o(i.mario_platform_left)
-    i.mario_platform_right                   0x00001800   Section        0  donkeykong.o(i.mario_platform_right)
-    i.setAddrWindow                          0x0000185c   Section        0  st7735.o(i.setAddrWindow)
-    setAddrWindow                            0x0000185d   Thumb Code   106  st7735.o(i.setAddrWindow)
-    i.update_Fire                            0x000018d0   Section        0  donkeykong.o(i.update_Fire)
-    i.x_ADC_In                               0x00001d98   Section        0  adc.o(i.x_ADC_In)
-    i.y_ADC_In                               0x00001dc4   Section        0  adc.o(i.y_ADC_In)
-    .constdata                               0x00001df0   Section     2018  st7735.o(.constdata)
-    Font                                     0x00001df0   Data        1275  st7735.o(.constdata)
-    Bcmd                                     0x000022eb   Data         103  st7735.o(.constdata)
-    Rcmd1                                    0x00002352   Data          59  st7735.o(.constdata)
-    Rcmd2green                               0x0000238d   Data          13  st7735.o(.constdata)
-    Rcmd2red                                 0x0000239a   Data          13  st7735.o(.constdata)
-    Rcmd3                                    0x000023a7   Data          43  st7735.o(.constdata)
-    .constdata                               0x000025d2   Section     6638  donkeykong.o(.constdata)
-    .constdata                               0x00003fc0   Section      240  texas.o(.constdata)
+    i.Delay100ms                             0x00000a04   Section        0  donkeykong.o(i.Delay100ms)
+    i.Delay1ms                               0x00000a24   Section        0  st7735.o(i.Delay1ms)
+    i.Move                                   0x00000a44   Section        0  donkeykong.o(i.Move)
+    i.Movedown                               0x00000aa4   Section        0  donkeykong.o(i.Movedown)
+    i.Moveleft                               0x00000ae8   Section        0  donkeykong.o(i.Moveleft)
+    i.Moveright                              0x00000b2c   Section        0  donkeykong.o(i.Moveright)
+    i.Output_Init                            0x00000b70   Section        0  st7735.o(i.Output_Init)
+    i.ST7735_DrawBitmap                      0x00000b80   Section        0  st7735.o(i.ST7735_DrawBitmap)
+    i.ST7735_FillRect                        0x00000ca0   Section        0  st7735.o(i.ST7735_FillRect)
+    i.ST7735_FillScreen                      0x00000d4c   Section        0  st7735.o(i.ST7735_FillScreen)
+    i.ST7735_InitR                           0x00000d70   Section        0  st7735.o(i.ST7735_InitR)
+    i.ST7735_SetCursor                       0x00000dec   Section        0  st7735.o(i.ST7735_SetCursor)
+    i.Timer0A_Handler                        0x00000e0c   Section        0  timer0.o(i.Timer0A_Handler)
+    i.Timer1A_Handler                        0x00000e24   Section        0  timer1.o(i.Timer1A_Handler)
+    i.checkADC                               0x00000e3c   Section        0  donkeykong.o(i.checkADC)
+    i.commandList                            0x00000fcc   Section        0  st7735.o(i.commandList)
+    commandList                              0x00000fcd   Thumb Code    86  st7735.o(i.commandList)
+    i.commonInit                             0x00001024   Section        0  st7735.o(i.commonInit)
+    commonInit                               0x00001025   Thumb Code   340  st7735.o(i.commonInit)
+    i.draw_Ladder1                           0x000011a8   Section        0  donkeykong.o(i.draw_Ladder1)
+    i.draw_Stage1                            0x00001318   Section        0  donkeykong.o(i.draw_Stage1)
+    i.draw_init_characters                   0x00001560   Section        0  donkeykong.o(i.draw_init_characters)
+    i.main                                   0x000015b4   Section        0  donkeykong.o(i.main)
+    i.mario_platform_left                    0x00001748   Section        0  donkeykong.o(i.mario_platform_left)
+    i.mario_platform_right                   0x000019d8   Section        0  donkeykong.o(i.mario_platform_right)
+    i.setAddrWindow                          0x00001c58   Section        0  st7735.o(i.setAddrWindow)
+    setAddrWindow                            0x00001c59   Thumb Code   106  st7735.o(i.setAddrWindow)
+    i.update_Fire                            0x00001ccc   Section        0  donkeykong.o(i.update_Fire)
+    i.x_ADC_In                               0x00002194   Section        0  adc.o(i.x_ADC_In)
+    i.y_ADC_In                               0x000021c0   Section        0  adc.o(i.y_ADC_In)
+    .constdata                               0x000021ec   Section     2018  st7735.o(.constdata)
+    Font                                     0x000021ec   Data        1275  st7735.o(.constdata)
+    Bcmd                                     0x000026e7   Data         103  st7735.o(.constdata)
+    Rcmd1                                    0x0000274e   Data          59  st7735.o(.constdata)
+    Rcmd2green                               0x00002789   Data          13  st7735.o(.constdata)
+    Rcmd2red                                 0x00002796   Data          13  st7735.o(.constdata)
+    Rcmd3                                    0x000027a3   Data          43  st7735.o(.constdata)
+    .constdata                               0x000029ce   Section     6638  donkeykong.o(.constdata)
+    .constdata                               0x000043bc   Section      240  texas.o(.constdata)
     .data                                    0x20000000   Section        4  timer0.o(.data)
     .data                                    0x20000004   Section        4  timer1.o(.data)
     .data                                    0x20000008   Section       44  st7735.o(.data)
@@ -736,50 +736,50 @@ Image Symbol Table
     __I$use$semihosting                      0x00000929   Thumb Code     0  use_no_semi.o(.text)
     __use_no_semihosting_swi                 0x00000929   Thumb Code     2  use_no_semi.o(.text)
     __semihosting_library_function           0x0000092b   Thumb Code     0  indicate_semi.o(.text)
-    ADC_Init                                 0x0000092d   Thumb Code   272  adc.o(i.ADC_Init)
-    Delay100ms                               0x00000a5d   Thumb Code    30  donkeykong.o(i.Delay100ms)
-    Delay1ms                                 0x00000a81   Thumb Code    32  st7735.o(i.Delay1ms)
-    Move                                     0x00000aa1   Thumb Code    90  donkeykong.o(i.Move)
-    Movedown                                 0x00000b01   Thumb Code    62  donkeykong.o(i.Movedown)
-    Moveleft                                 0x00000b45   Thumb Code    62  donkeykong.o(i.Moveleft)
-    Moveright                                0x00000b89   Thumb Code    62  donkeykong.o(i.Moveright)
-    Output_Init                              0x00000bcd   Thumb Code    16  st7735.o(i.Output_Init)
-    ST7735_DrawBitmap                        0x00000bdd   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
-    ST7735_FillRect                          0x00000cfd   Thumb Code   164  st7735.o(i.ST7735_FillRect)
-    ST7735_FillScreen                        0x00000da9   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
-    ST7735_InitR                             0x00000dcd   Thumb Code    90  st7735.o(i.ST7735_InitR)
-    ST7735_SetCursor                         0x00000e49   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
-    Timer0A_Handler                          0x00000e69   Thumb Code    16  timer0.o(i.Timer0A_Handler)
-    Timer1A_Handler                          0x00000e81   Thumb Code    16  timer1.o(i.Timer1A_Handler)
-    checkADC                                 0x00000e99   Thumb Code   370  donkeykong.o(i.checkADC)
-    draw_Ladder1                             0x00001205   Thumb Code   364  donkeykong.o(i.draw_Ladder1)
-    draw_Stage1                              0x00001375   Thumb Code   578  donkeykong.o(i.draw_Stage1)
-    draw_init_characters                     0x000015bd   Thumb Code    80  donkeykong.o(i.draw_init_characters)
-    main                                     0x00001611   Thumb Code   386  donkeykong.o(i.main)
-    mario_platform_left                      0x000017a5   Thumb Code    86  donkeykong.o(i.mario_platform_left)
-    mario_platform_right                     0x00001801   Thumb Code    86  donkeykong.o(i.mario_platform_right)
-    update_Fire                              0x000018d1   Thumb Code  1214  donkeykong.o(i.update_Fire)
-    x_ADC_In                                 0x00001d99   Thumb Code    36  adc.o(i.x_ADC_In)
-    y_ADC_In                                 0x00001dc5   Thumb Code    36  adc.o(i.y_ADC_In)
-    dBfs                                     0x000023d2   Data         512  st7735.o(.constdata)
-    mario_run_right                          0x000025d2   Data         600  donkeykong.o(.constdata)
-    mario_run_left                           0x0000282a   Data         600  donkeykong.o(.constdata)
-    mario_still_right                        0x00002a82   Data         600  donkeykong.o(.constdata)
-    mario_still_left                         0x00002cda   Data         600  donkeykong.o(.constdata)
-    bowser_open_mouth                        0x00002f32   Data        1922  donkeykong.o(.constdata)
-    bowser_closed_mouth                      0x000036b4   Data        1922  donkeykong.o(.constdata)
-    ladder                                   0x00003e36   Data          78  donkeykong.o(.constdata)
-    platform                                 0x00003e84   Data          60  donkeykong.o(.constdata)
-    fireball_right                           0x00003ec0   Data         128  donkeykong.o(.constdata)
-    fireball_left                            0x00003f40   Data         128  donkeykong.o(.constdata)
-    InputPortMsg                             0x00003fc0   Data          40  texas.o(.constdata)
-    OutputPortMsg                            0x00003fe8   Data          40  texas.o(.constdata)
-    BlankMsg                                 0x00004010   Data          40  texas.o(.constdata)
-    InitializedMsg                           0x00004038   Data          40  texas.o(.constdata)
-    IntroMsg                                 0x00004060   Data          40  texas.o(.constdata)
-    DoneMsg                                  0x00004088   Data          40  texas.o(.constdata)
-    Region$$Table$$Base                      0x000040b0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x000040d0   Number         0  anon$$obj.o(Region$$Table)
+    ADC_Init                                 0x0000092d   Thumb Code   188  adc.o(i.ADC_Init)
+    Delay100ms                               0x00000a05   Thumb Code    32  donkeykong.o(i.Delay100ms)
+    Delay1ms                                 0x00000a25   Thumb Code    32  st7735.o(i.Delay1ms)
+    Move                                     0x00000a45   Thumb Code    90  donkeykong.o(i.Move)
+    Movedown                                 0x00000aa5   Thumb Code    62  donkeykong.o(i.Movedown)
+    Moveleft                                 0x00000ae9   Thumb Code    62  donkeykong.o(i.Moveleft)
+    Moveright                                0x00000b2d   Thumb Code    62  donkeykong.o(i.Moveright)
+    Output_Init                              0x00000b71   Thumb Code    16  st7735.o(i.Output_Init)
+    ST7735_DrawBitmap                        0x00000b81   Thumb Code   280  st7735.o(i.ST7735_DrawBitmap)
+    ST7735_FillRect                          0x00000ca1   Thumb Code   164  st7735.o(i.ST7735_FillRect)
+    ST7735_FillScreen                        0x00000d4d   Thumb Code    28  st7735.o(i.ST7735_FillScreen)
+    ST7735_InitR                             0x00000d71   Thumb Code    90  st7735.o(i.ST7735_InitR)
+    ST7735_SetCursor                         0x00000ded   Thumb Code    22  st7735.o(i.ST7735_SetCursor)
+    Timer0A_Handler                          0x00000e0d   Thumb Code    16  timer0.o(i.Timer0A_Handler)
+    Timer1A_Handler                          0x00000e25   Thumb Code    16  timer1.o(i.Timer1A_Handler)
+    checkADC                                 0x00000e3d   Thumb Code   370  donkeykong.o(i.checkADC)
+    draw_Ladder1                             0x000011a9   Thumb Code   364  donkeykong.o(i.draw_Ladder1)
+    draw_Stage1                              0x00001319   Thumb Code   578  donkeykong.o(i.draw_Stage1)
+    draw_init_characters                     0x00001561   Thumb Code    80  donkeykong.o(i.draw_init_characters)
+    main                                     0x000015b5   Thumb Code   386  donkeykong.o(i.main)
+    mario_platform_left                      0x00001749   Thumb Code   652  donkeykong.o(i.mario_platform_left)
+    mario_platform_right                     0x000019d9   Thumb Code   636  donkeykong.o(i.mario_platform_right)
+    update_Fire                              0x00001ccd   Thumb Code  1214  donkeykong.o(i.update_Fire)
+    x_ADC_In                                 0x00002195   Thumb Code    36  adc.o(i.x_ADC_In)
+    y_ADC_In                                 0x000021c1   Thumb Code    36  adc.o(i.y_ADC_In)
+    dBfs                                     0x000027ce   Data         512  st7735.o(.constdata)
+    mario_run_right                          0x000029ce   Data         600  donkeykong.o(.constdata)
+    mario_run_left                           0x00002c26   Data         600  donkeykong.o(.constdata)
+    mario_still_right                        0x00002e7e   Data         600  donkeykong.o(.constdata)
+    mario_still_left                         0x000030d6   Data         600  donkeykong.o(.constdata)
+    bowser_open_mouth                        0x0000332e   Data        1922  donkeykong.o(.constdata)
+    bowser_closed_mouth                      0x00003ab0   Data        1922  donkeykong.o(.constdata)
+    ladder                                   0x00004232   Data          78  donkeykong.o(.constdata)
+    platform                                 0x00004280   Data          60  donkeykong.o(.constdata)
+    fireball_right                           0x000042bc   Data         128  donkeykong.o(.constdata)
+    fireball_left                            0x0000433c   Data         128  donkeykong.o(.constdata)
+    InputPortMsg                             0x000043bc   Data          40  texas.o(.constdata)
+    OutputPortMsg                            0x000043e4   Data          40  texas.o(.constdata)
+    BlankMsg                                 0x0000440c   Data          40  texas.o(.constdata)
+    InitializedMsg                           0x00004434   Data          40  texas.o(.constdata)
+    IntroMsg                                 0x0000445c   Data          40  texas.o(.constdata)
+    DoneMsg                                  0x00004484   Data          40  texas.o(.constdata)
+    Region$$Table$$Base                      0x000044ac   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000044cc   Number         0  anon$$obj.o(Region$$Table)
     PeriodicTask0                            0x20000000   Data           4  timer0.o(.data)
     PeriodicTask1                            0x20000004   Data           4  timer1.o(.data)
     StX                                      0x20000008   Data           4  st7735.o(.data)
@@ -820,9 +820,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x0000457c, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000041dc])
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00004978, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000045d8])
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x000040d0, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x000044cc, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -884,39 +884,39 @@ Memory Map of the image
     0x00000928   0x00000002   Code   RO          655    .text               c_w.l(use_no_semi.o)
     0x0000092a   0x00000000   Code   RO          657    .text               c_w.l(indicate_semi.o)
     0x0000092a   0x00000002   PAD
-    0x0000092c   0x00000130   Code   RO           20    i.ADC_Init          adc.o
-    0x00000a5c   0x00000024   Code   RO          439    i.Delay100ms        donkeykong.o
-    0x00000a80   0x00000020   Code   RO          167    i.Delay1ms          st7735.o
-    0x00000aa0   0x00000060   Code   RO          440    i.Move              donkeykong.o
-    0x00000b00   0x00000044   Code   RO          441    i.Movedown          donkeykong.o
-    0x00000b44   0x00000044   Code   RO          442    i.Moveleft          donkeykong.o
-    0x00000b88   0x00000044   Code   RO          443    i.Moveright         donkeykong.o
-    0x00000bcc   0x00000010   Code   RO          170    i.Output_Init       st7735.o
-    0x00000bdc   0x00000120   Code   RO          174    i.ST7735_DrawBitmap  st7735.o
-    0x00000cfc   0x000000ac   Code   RO          182    i.ST7735_FillRect   st7735.o
-    0x00000da8   0x00000024   Code   RO          183    i.ST7735_FillScreen  st7735.o
-    0x00000dcc   0x0000007c   Code   RO          185    i.ST7735_InitR      st7735.o
-    0x00000e48   0x00000020   Code   RO          198    i.ST7735_SetCursor  st7735.o
-    0x00000e68   0x00000018   Code   RO           50    i.Timer0A_Handler   timer0.o
-    0x00000e80   0x00000018   Code   RO           71    i.Timer1A_Handler   timer1.o
-    0x00000e98   0x00000190   Code   RO          445    i.checkADC          donkeykong.o
-    0x00001028   0x00000056   Code   RO          202    i.commandList       st7735.o
-    0x0000107e   0x00000002   PAD
-    0x00001080   0x00000184   Code   RO          203    i.commonInit        st7735.o
-    0x00001204   0x00000170   Code   RO          446    i.draw_Ladder1      donkeykong.o
-    0x00001374   0x00000248   Code   RO          447    i.draw_Stage1       donkeykong.o
-    0x000015bc   0x00000054   Code   RO          448    i.draw_init_characters  donkeykong.o
-    0x00001610   0x00000194   Code   RO          449    i.main              donkeykong.o
-    0x000017a4   0x0000005c   Code   RO          450    i.mario_platform_left  donkeykong.o
-    0x00001800   0x0000005c   Code   RO          451    i.mario_platform_right  donkeykong.o
-    0x0000185c   0x00000074   Code   RO          209    i.setAddrWindow     st7735.o
-    0x000018d0   0x000004c8   Code   RO          452    i.update_Fire       donkeykong.o
-    0x00001d98   0x0000002c   Code   RO           21    i.x_ADC_In          adc.o
-    0x00001dc4   0x0000002c   Code   RO           22    i.y_ADC_In          adc.o
-    0x00001df0   0x000007e2   Data   RO          211    .constdata          st7735.o
-    0x000025d2   0x000019ee   Data   RO          453    .constdata          donkeykong.o
-    0x00003fc0   0x000000f0   Data   RO          538    .constdata          texas.o
-    0x000040b0   0x00000020   Data   RO          709    Region$$Table       anon$$obj.o
+    0x0000092c   0x000000d8   Code   RO           20    i.ADC_Init          adc.o
+    0x00000a04   0x00000020   Code   RO          439    i.Delay100ms        donkeykong.o
+    0x00000a24   0x00000020   Code   RO          167    i.Delay1ms          st7735.o
+    0x00000a44   0x00000060   Code   RO          440    i.Move              donkeykong.o
+    0x00000aa4   0x00000044   Code   RO          441    i.Movedown          donkeykong.o
+    0x00000ae8   0x00000044   Code   RO          442    i.Moveleft          donkeykong.o
+    0x00000b2c   0x00000044   Code   RO          443    i.Moveright         donkeykong.o
+    0x00000b70   0x00000010   Code   RO          170    i.Output_Init       st7735.o
+    0x00000b80   0x00000120   Code   RO          174    i.ST7735_DrawBitmap  st7735.o
+    0x00000ca0   0x000000ac   Code   RO          182    i.ST7735_FillRect   st7735.o
+    0x00000d4c   0x00000024   Code   RO          183    i.ST7735_FillScreen  st7735.o
+    0x00000d70   0x0000007c   Code   RO          185    i.ST7735_InitR      st7735.o
+    0x00000dec   0x00000020   Code   RO          198    i.ST7735_SetCursor  st7735.o
+    0x00000e0c   0x00000018   Code   RO           50    i.Timer0A_Handler   timer0.o
+    0x00000e24   0x00000018   Code   RO           71    i.Timer1A_Handler   timer1.o
+    0x00000e3c   0x00000190   Code   RO          445    i.checkADC          donkeykong.o
+    0x00000fcc   0x00000056   Code   RO          202    i.commandList       st7735.o
+    0x00001022   0x00000002   PAD
+    0x00001024   0x00000184   Code   RO          203    i.commonInit        st7735.o
+    0x000011a8   0x00000170   Code   RO          446    i.draw_Ladder1      donkeykong.o
+    0x00001318   0x00000248   Code   RO          447    i.draw_Stage1       donkeykong.o
+    0x00001560   0x00000054   Code   RO          448    i.draw_init_characters  donkeykong.o
+    0x000015b4   0x00000194   Code   RO          449    i.main              donkeykong.o
+    0x00001748   0x00000290   Code   RO          450    i.mario_platform_left  donkeykong.o
+    0x000019d8   0x00000280   Code   RO          451    i.mario_platform_right  donkeykong.o
+    0x00001c58   0x00000074   Code   RO          209    i.setAddrWindow     st7735.o
+    0x00001ccc   0x000004c8   Code   RO          452    i.update_Fire       donkeykong.o
+    0x00002194   0x0000002c   Code   RO           21    i.x_ADC_In          adc.o
+    0x000021c0   0x0000002c   Code   RO           22    i.y_ADC_In          adc.o
+    0x000021ec   0x000007e2   Data   RO          211    .constdata          st7735.o
+    0x000029ce   0x000019ee   Data   RO          453    .constdata          donkeykong.o
+    0x000043bc   0x000000f0   Data   RO          538    .constdata          texas.o
+    0x000044ac   0x00000020   Data   RO          709    Region$$Table       anon$$obj.o
 
 
     Execution Region ER_RW (Base: 0x20000000, Size: 0x000004ac, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000010c])
@@ -950,19 +950,19 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       392         48          0          0          0       3965   adc.o
+       304         44          0          0          0       4073   adc.o
          0          0          0          0          0       1444   dac.o
-      3584        136       6638       1089          0      13140   donkeykong.o
-        76         14          0          0          0        188   lcd.o
-        60         14          0          4          0        188   random.o
-      1290        126       2018         44          0       9142   st7735.o
-       692        632          0          0       1024        876   startup.o
+      4692        126       6638       1089          0      15652   donkeykong.o
+        76         14          0          0          0        216   lcd.o
+        60         14          0          4          0        216   random.o
+      1290        126       2018         44          0       9542   st7735.o
+       692        632          0          0       1024        932   startup.o
       1184        188        240         48         56      14668   texas.o
-        24          8          0          4          0        770   timer0.o
-        24          8          0          4          0        770   timer1.o
+        24          8          0          4          0        886   timer0.o
+        24          8          0          4          0        886   timer1.o
 
     ----------------------------------------------------------------------
-      7328       1174       8928       1196       1084      45151   Object Totals
+      8348       1160       8928       1196       1084      48515   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          3          4          0   (incl. Padding)
 
@@ -1011,15 +1011,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7664       1190       8928       1196       1180      43959   Grand Totals
-      7664       1190       8928        268       1180      43959   ELF Image Totals (compressed)
-      7664       1190       8928        268          0          0   ROM Totals
+      8684       1176       8928       1196       1180      47323   Grand Totals
+      8684       1176       8928        268       1180      47323   ELF Image Totals (compressed)
+      8684       1176       8928        268          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                16592 (  16.20kB)
+    Total RO  Size (Code + RO Data)                17612 (  17.20kB)
     Total RW  Size (RW Data + ZI Data)              2376 (   2.32kB)
-    Total ROM Size (Code + RO Data + RW Data)      16860 (  16.46kB)
+    Total ROM Size (Code + RO Data + RW Data)      17880 (  17.46kB)
 
 ==============================================================================
 
