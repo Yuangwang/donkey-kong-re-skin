@@ -695,10 +695,12 @@ void update_Fire (uint8_t firenum){
 	}
 }
 	
+uint32_t xADCvalue;
+	uint32_t yADCvalue;
 //movement controls for mario
 void checkADC (void){
-	uint32_t xADCvalue = x_ADC_In();
-	uint32_t yADCvalue = y_ADC_In();
+	xADCvalue = x_ADC_In();
+	yADCvalue = y_ADC_In();
 	if((xADCvalue<=3000)&&(xADCvalue>=1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
 		characters[mario].changex = 0;
 		if((characters[mario].pastx)<(characters[mario].newx)){
@@ -742,7 +744,7 @@ void checkADC (void){
 	}
 	if(yADCvalue>3000){
 		for(uint16_t i=0;i<18;i++){
-			if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+			if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
 				characters[mario].changex = 0;
 				characters[mario].changey = 1;
 				characters[mario].movement = climbing_up;

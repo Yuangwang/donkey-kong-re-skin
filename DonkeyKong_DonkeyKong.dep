@@ -2,7 +2,7 @@ Dependencies for Project 'DonkeyKong', Target 'DonkeyKong': (DO NOT MODIFY !)
 F (.\startup.s)(0x5904ED67)(--cpu Cortex-M4 -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
 F (.\random.s)(0x5904ED67)(--cpu Cortex-M4 -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\random.lst --xref -o .\random.o --depend .\random.d)
 F (.\DAC.c)(0x5904ED67)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\dac.o --omf_browse .\dac.crf --depend .\dac.d)
-F (.\ADC.c)(0x5904F904)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\adc.o --omf_browse .\adc.crf --depend .\adc.d)
+F (.\ADC.c)(0x5904FE36)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\adc.o --omf_browse .\adc.crf --depend .\adc.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (tm4c123gh6pm.h)(0x5904ED67)
 F (.\Timer0.c)(0x5904ED67)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\timer0.o --omf_browse .\timer0.crf --depend .\timer0.d)
@@ -23,7 +23,7 @@ I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (ST7735.h)(0x5904ED67)
 I (tm4c123gh6pm.h)(0x5904ED67)
 F (.\tm4c123gh6pm.h)(0x5904ED67)()
-F (.\DonkeyKong.c)(0x5904FA7F)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\donkeykong.o --omf_browse .\donkeykong.crf --depend .\donkeykong.d)
+F (.\DonkeyKong.c)(0x59050271)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\donkeykong.o --omf_browse .\donkeykong.crf --depend .\donkeykong.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (tm4c123gh6pm.h)(0x5904ED67)
 I (ST7735.h)(0x5904ED67)

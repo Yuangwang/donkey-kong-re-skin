@@ -20,14 +20,18 @@ void ADC_Init(void){
 	delay = SYSCTL_RCGCADC_R;	//delay
 	delay = SYSCTL_RCGCADC_R;	//delay
 	delay = SYSCTL_RCGCADC_R;	//delay
+	ADC0_PC_R &= ~0xF;              // 8) clear max sample rate field
 	ADC0_PC_R = 0x01;	// set 125khz conversion speed
-	ADC0_SSPRI_R = 0x0123;	// set sequencer priority
-	ADC0_EMUX_R &= ~0xF000;	// set software start trigger event
+	ADC0_SSPRI_R = 0x3210;	// set sequencer priority	//was 0123
+	ADC0_ACTSS_R &= ~0x000C;        // 10) disable sample sequencer 2 AND 3
+	ADC0_EMUX_R &= ~0x0F000;	// set software start trigger event
 	ADC0_SSMUX3_R &= ~0x0007; // clear SS3 field
   ADC0_SSMUX3_R += 1;  // set channel 1
+	ADC0_SSMUX2_R = 0x0089;         // 12) set channels for SS2
+  ADC0_SSCTL2_R = 0x0060;         // 13) no TS0 D0 IE0 END0 TS1 D1, yes IE1 END1
 	ADC0_SSCTL3_R = 0x0006; //sample control bits
-	ADC0_IM_R &= ~0x0008;	//Disable interrupts
-	ADC0_ACTSS_R |= 0x0008;	//enable selected sequencer 3
+	ADC0_IM_R &= ~0x000C;	//Disable interrupts
+	ADC0_ACTSS_R |= 0x000C;	//enable selected sequencer 2 and 3
 	
 //	init for second ADC sequencer 2 in channel 9 PE4
 /*	ADC0_ACTSS_R &= ~0X04;	//Disables sequencer for the init
@@ -58,10 +62,10 @@ uint32_t x_ADC_In(void){
 
 uint32_t y_ADC_In(void){  
   uint32_t data;
-	ADC0_PSSI_R = 0x0008;
-	while ((ADC0_RIS_R&0x08) == 0){
+	ADC0_PSSI_R = 0x0004;
+	while ((ADC0_RIS_R&0x04) == 0){
 	}
-	data = ADC0_SSFIFO3_R&0xFFF;
-	ADC0_ISC_R = 0x0008;
+	data = ADC0_SSFIFO2_R&0xFFF;
+	ADC0_ISC_R = 0x0004;
   return data;
 }
