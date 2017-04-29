@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\DonkeyKong.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\DonkeyKong.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Fri Apr 28 23:20:44 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sat Apr 29 15:43:10 2017
 <BR><P>
-<H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        112 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; draw_Stage1 &rArr; draw_Ladder1 &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 <P>
@@ -37,7 +37,6 @@ Mutually Recursive functions
  <LI><a href="#[9]">SVC_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[9]">SVC_Handler</a><BR>
  <LI><a href="#[a]">DebugMon_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[a]">DebugMon_Handler</a><BR>
  <LI><a href="#[b]">PendSV_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[b]">PendSV_Handler</a><BR>
- <LI><a href="#[c]">SysTick_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[c]">SysTick_Handler</a><BR>
  <LI><a href="#[1b]">ADC0Seq0_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1b]">ADC0Seq0_Handler</a><BR>
  <LI><a href="#[90]">writedata</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[90]">writedata</a><BR>
  <LI><a href="#[8f]">writecommand</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[8f]">writecommand</a><BR>
@@ -132,7 +131,7 @@ Function Pointers
  <LI><a href="#[47]">SSI3_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[9]">SVC_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[29]">SysCtl_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[c]">SysTick_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[c]">SysTick_Handler</a> from donkeykong.o(i.SysTick_Handler) referenced from startup.o(RESET)
  <LI><a href="#[20]">Timer0A_Handler</a> from timer0.o(i.Timer0A_Handler) referenced from startup.o(RESET)
  <LI><a href="#[21]">Timer0B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[22]">Timer1A_Handler</a> from timer1.o(i.Timer1A_Handler) referenced from startup.o(RESET)
@@ -232,13 +231,6 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup.o(RESET))
-<BR><BR>[Calls]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
-</UL>
-<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
@@ -682,7 +674,7 @@ Global Symbols
 <P><STRONG><a name="[d7]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[88]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; draw_Stage1 &rArr; draw_Ladder1 &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -720,13 +712,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b2]"></a>Random_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, random.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
 </UL>
 
 <P><STRONG><a name="[df]"></a>Random32</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, random.o(.text), UNUSED)
 
 <P><STRONG><a name="[b3]"></a>Random</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, random.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
 </UL>
 
 <P><STRONG><a name="[8f]"></a>writecommand</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, lcd.o(.text))
@@ -827,8 +819,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = __user_setup_stackheap
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
 </UL>
 <BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
 </UL>
@@ -857,37 +849,31 @@ Global Symbols
 
 <P><STRONG><a name="[f0]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[ae]"></a>ADC_Init</STRONG> (Thumb, 188 bytes, Stack size 0 bytes, adc.o(i.ADC_Init))
+<P><STRONG><a name="[b0]"></a>ADC_Init</STRONG> (Thumb, 188 bytes, Stack size 0 bytes, adc.o(i.ADC_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[b0]"></a>Delay100ms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, donkeykong.o(i.Delay100ms))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Delay100ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[a9]"></a>Delay1ms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, st7735.o(i.Delay1ms))
+<P><STRONG><a name="[ac]"></a>Delay1ms</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, st7735.o(i.Delay1ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Delay1ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commonInit
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
 
-<P><STRONG><a name="[b1]"></a>Move</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, donkeykong.o(i.Move))
-<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[a6]"></a>Move</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, donkeykong.o(i.Move))
+<BR><BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
 <P><STRONG><a name="[b4]"></a>Movedown</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, donkeykong.o(i.Movedown))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
 </UL>
 
 <P><STRONG><a name="[b6]"></a>Moveleft</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, donkeykong.o(i.Moveleft))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
 </UL>
 
 <P><STRONG><a name="[b5]"></a>Moveright</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, donkeykong.o(i.Moveright))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
 </UL>
 
 <P><STRONG><a name="[9b]"></a>Output_Init</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, st7735.o(i.Output_Init))
@@ -908,9 +894,9 @@ Global Symbols
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
 </UL>
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_init_characters
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Ladder1
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_init_characters
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Ladder1
 </UL>
 
 <P><STRONG><a name="[a0]"></a>ST7735_FillRect</STRONG> (Thumb, 164 bytes, Stack size 32 bytes, st7735.o(i.ST7735_FillRect))
@@ -930,7 +916,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillRect
 </UL>
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fireball_collision
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fireball_collision
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Output_Init
 </UL>
@@ -953,6 +939,21 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR
 </UL>
 
+<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 306 bytes, Stack size 8 bytes, donkeykong.o(i.SysTick_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
+<LI>Call Chain = SysTick_Handler &rArr; fireball_collision &rArr; ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fireball_collision
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Move
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[b1]"></a>SysTick_Init</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, donkeykong.o(i.SysTick_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
 <P><STRONG><a name="[20]"></a>Timer0A_Handler</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, timer0.o(i.Timer0A_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Timer0A_Handler
 </UL>
@@ -963,37 +964,37 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[a4]"></a>checkADC</STRONG> (Thumb, 370 bytes, Stack size 16 bytes, donkeykong.o(i.checkADC))
+<P><STRONG><a name="[a5]"></a>checkADC</STRONG> (Thumb, 370 bytes, Stack size 16 bytes, donkeykong.o(i.checkADC))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = checkADC
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mario_platform_right
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mario_platform_left
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;y_ADC_In
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;x_ADC_In
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mario_platform_right
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mario_platform_left
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;y_ADC_In
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;x_ADC_In
 </UL>
-<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[aa]"></a>draw_Ladder1</STRONG> (Thumb, 364 bytes, Stack size 16 bytes, donkeykong.o(i.draw_Ladder1))
+<P><STRONG><a name="[ad]"></a>draw_Ladder1</STRONG> (Thumb, 364 bytes, Stack size 16 bytes, donkeykong.o(i.draw_Ladder1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
 <LI>Call Chain = draw_Ladder1 &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
 </UL>
 
-<P><STRONG><a name="[ab]"></a>draw_Stage1</STRONG> (Thumb, 578 bytes, Stack size 16 bytes, donkeykong.o(i.draw_Stage1))
+<P><STRONG><a name="[ae]"></a>draw_Stage1</STRONG> (Thumb, 578 bytes, Stack size 16 bytes, donkeykong.o(i.draw_Stage1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = draw_Stage1 &rArr; draw_Ladder1 &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Ladder1
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Ladder1
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ac]"></a>draw_init_characters</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, donkeykong.o(i.draw_init_characters))
+<P><STRONG><a name="[af]"></a>draw_init_characters</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, donkeykong.o(i.draw_init_characters))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72 + Unknown Stack Size
 <LI>Call Chain = draw_init_characters &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
@@ -1002,64 +1003,58 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ad]"></a>fireball_collision</STRONG> (Thumb, 182 bytes, Stack size 16 bytes, donkeykong.o(i.fireball_collision))
+<P><STRONG><a name="[a7]"></a>fireball_collision</STRONG> (Thumb, 182 bytes, Stack size 16 bytes, donkeykong.o(i.fireball_collision))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = fireball_collision &rArr; ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[89]"></a>main</STRONG> (Thumb, 416 bytes, Stack size 24 bytes, donkeykong.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120 + Unknown Stack Size
+<P><STRONG><a name="[89]"></a>main</STRONG> (Thumb, 166 bytes, Stack size 16 bytes, donkeykong.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
 <LI>Call Chain = main &rArr; draw_Stage1 &rArr; draw_Ladder1 &rArr; ST7735_DrawBitmap &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TExaS_Init
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fireball_collision
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_init_characters
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Move
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay100ms
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_init_characters
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_Stage1
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_FillScreen
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_DrawBitmap
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Output_Init
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[a7]"></a>mario_platform_left</STRONG> (Thumb, 652 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_left))
-<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<P><STRONG><a name="[aa]"></a>mario_platform_left</STRONG> (Thumb, 652 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_left))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 
-<P><STRONG><a name="[a8]"></a>mario_platform_right</STRONG> (Thumb, 636 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_right))
-<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<P><STRONG><a name="[ab]"></a>mario_platform_right</STRONG> (Thumb, 636 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_right))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 
-<P><STRONG><a name="[af]"></a>update_Fire</STRONG> (Thumb, 1214 bytes, Stack size 24 bytes, donkeykong.o(i.update_Fire))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
+<P><STRONG><a name="[a4]"></a>update_Fire</STRONG> (Thumb, 1208 bytes, Stack size 16 bytes, donkeykong.o(i.update_Fire))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
 <LI>Call Chain = update_Fire
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Moveright
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Moveleft
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Movedown
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;x_ADC_In
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Random
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Random_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[a5]"></a>x_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.x_ADC_In))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;update_Fire
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<P><STRONG><a name="[a8]"></a>x_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.x_ADC_In))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 
-<P><STRONG><a name="[a6]"></a>y_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.y_ADC_In))
-<BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
+<P><STRONG><a name="[a9]"></a>y_ADC_In</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.y_ADC_In))
+<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 <P>
 <H3>
@@ -1069,7 +1064,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
 <LI>Call Chain = commandList &rArr; Delay1ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
+<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writedata
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writecommand
 </UL>
@@ -1081,7 +1076,7 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
 <LI>Call Chain = commonInit &rArr; commandList &rArr; Delay1ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
+<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay1ms
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commandList
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7735_InitR

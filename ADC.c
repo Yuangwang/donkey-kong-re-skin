@@ -11,10 +11,10 @@ void ADC_Init(void){
  SYSCTL_RCGCGPIO_R |= 0x10;
 	while((SYSCTL_PRGPIO_R & 0x10) == 0){
 	}
-	GPIO_PORTE_DIR_R &= ~0x04;	//make PE2 input
-	GPIO_PORTE_AFSEL_R |= 0x04;	//enable alternate function
-	GPIO_PORTE_DEN_R &= ~0x04;	//disable digital i/o
-	GPIO_PORTE_AMSEL_R |= 0x04;	//enable analog function on PE4
+	GPIO_PORTE_DIR_R &= ~0x14;	//make PE2 input
+	GPIO_PORTE_AFSEL_R |= 0x14;	//enable alternate function
+	GPIO_PORTE_DEN_R &= ~0x14;	//disable digital i/o
+	GPIO_PORTE_AMSEL_R |= 0x14;	//enable analog function on PE4
 	SYSCTL_RCGCADC_R |= 0x01;	//enable adc clock
 	uint32_t delay = SYSCTL_RCGCADC_R;	//delay
 	delay = SYSCTL_RCGCADC_R;	//delay

@@ -69,6 +69,7 @@
 #define  fireball10  11
 #define  fireball11  12
 #define  character_size 13
+#define NVIC_ST_RELOAD  0x00268480  
 
 
 
@@ -408,69 +409,32 @@ void draw_Ladder1(void);
 void mario_platform_left(void);
 void mario_platform_right(void);
 void fireball_collision(uint8_t firenum);
+void SysTick_Init(void);
+void SysTick_Handler(void);
 
+
+uint8_t fireball_wait = 0;	//delay for next fireball
+uint8_t fireball_ref = 2;	//reference to which fireball
 int main(void){
   TExaS_Init();  // set system clock to 80 MHz
 	ADC_Init();
+	SysTick_Init();
   Output_Init();
   ST7735_FillScreen(0x0000);            // set screen to black
 	draw_Stage1();
 	draw_init_characters();
-	uint8_t fireball_wait = 0;	//delay for next fireball
-	uint8_t fireball_ref = 2;	//reference to which fireball
   while(!lose){
 	//fireballs fire one by one
+		draw_Stage1();	//layering stage behind mario
+		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 		for(uint8_t fireball = 2; fireball < 13; fireball++){
 			if(characters[fireball].status == alive){
-				update_Fire(fireball);
 				ST7735_DrawBitmap(characters[fireball].newx, characters[fireball].newy, characters[fireball].pic, 8,8);
 			}
 		}
-		//mario movement
-		checkADC();		
-		if(characters[mario].movement==climbing_up){
-			for(uint16_t i=0;i<18;i++){
-				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
-					characters[mario].movement = still;
-					characters[mario].changey = 0;
-				}
-				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
-			}
-		}
-		if(characters[mario].movement==climbing_down){
-			for(uint16_t i=0;i<18;i++){
-				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
-					characters[mario].movement = still;
-					characters[mario].changey = 0;
-				}
-			}
-			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
-		}
-		Delay100ms(1);
-		draw_Stage1();	//layering stage behind mario
-		Move(mario);
-		//checks if mario is on platform
-		if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
-			characters[mario].pasty = characters[mario].newy;
-			characters[mario].newy = characters[mario].miny;
-		}
-		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
-		//picks when a new fireball will show up
-		fireball_wait++ ;
-		if(fireball_wait == 75){
-			fireball_wait = 0;
-			if(fireball_ref == 10){
-				fireball_ref = 2;
-			}
-			fireball_ref++;
-			characters[fireball_ref].status = alive;
-			characters[bowser].pic = bowser_open_mouth;
-		}
-		for(uint8_t fireball = 2; fireball < 13; fireball++){
-			fireball_collision(fireball);
-		}
 	}
+	ST7735_FillScreen(0);
 }
 void Move(uint8_t char_num){
 	characters[char_num].pastx = characters[char_num].newx;
@@ -526,7 +490,8 @@ void update_Fire (uint8_t firenum){
 	uint8_t not_Move = 1;	 //tracks if a move was done
 	for(uint8_t i = 0; i < 24 ; i++){	//Check if the fireball should go down ladder
 		if((characters[firenum].newx == enemy_ladders_top[i].x) && (characters[firenum].newy == enemy_ladders_top[i].y)){
-				Random_Init(x_ADC_In()*5);
+				//Random_Init(x_ADC_In()*5);
+				Random_Init(NVIC_ST_CURRENT_R+100);
 				if(Random() > 127){
 					Movedown(firenum);
 				}			
@@ -1130,7 +1095,61 @@ void draw_init_characters(void){
 }
 // You can use this timer only if you learn how it works
 
+void SysTick_Init(void){
+	NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
+  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD;  // maximum reload value
+  NVIC_ST_CURRENT_R = 0;                // any write to current clears it
+  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0X00FFFFFF)|0X40000000; //priority 2
+	// enable SysTick with core clock
+  NVIC_ST_CTRL_R = 0x00000007;
+}
 	
+void SysTick_Handler(void){
+	for(uint8_t fireball = 2; fireball < 13; fireball++){
+			if(characters[fireball].status == alive){
+				update_Fire(fireball);
+			}
+		}
+	checkADC();		
+		if(characters[mario].movement==climbing_up){
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+					characters[mario].movement = still;
+					characters[mario].changey = 0;
+				}
+				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
+			}
+		}
+		if(characters[mario].movement==climbing_down){
+			for(uint16_t i=0;i<18;i++){
+				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
+					characters[mario].movement = still;
+					characters[mario].changey = 0;
+				}
+			}
+		}
+			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
+		Move(mario);
+		//checks if mario is on platform
+		if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
+			characters[mario].pasty = characters[mario].newy;
+			characters[mario].newy = characters[mario].miny;
+		}
+		fireball_wait++ ;
+		if(fireball_wait == 75){
+			fireball_wait = 0;
+			if(fireball_ref == 10){
+				fireball_ref = 2;
+			}
+			fireball_ref++;
+			characters[fireball_ref].status = alive;
+			characters[bowser].pic = bowser_open_mouth;
+		}
+		for(uint8_t fireball = 2; fireball < 13; fireball++){
+			fireball_collision(fireball);
+		}
+}
+
 void Delay100ms(uint32_t count){
 	uint32_t volatile time;
   while(count>0){
