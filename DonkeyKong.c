@@ -456,6 +456,7 @@ void mario_platform_right(void);
 void fireball_collision(uint8_t firenum);
 void SysTick_Init(void);
 void SysTick_Handler(void);
+void PortF_Init(void);
 
 
 uint8_t fireball_wait = 0;	//delay for next fireball
@@ -464,6 +465,8 @@ int main(void){
   TExaS_Init();  // set system clock to 80 MHz
 	ADC_Init();
 	SysTick_Init();
+	PortF_Init();
+	EnableInterrupts();
   Output_Init();
   ST7735_FillScreen(0x0000);            // set screen to black
 	draw_Stage1();
@@ -482,9 +485,11 @@ int main(void){
 	ST7735_FillScreen(0);
 }
 void Move(uint8_t char_num){
-	characters[char_num].pastx = characters[char_num].newx;
+	if(((characters[char_num].newx + characters[char_num].changex)<113)&&((characters[char_num].newx + characters[char_num].changex)>0)){
+		characters[char_num].pastx = characters[char_num].newx;
+		characters[char_num].newx += characters[char_num].changex;
+	}
 	characters[char_num].pasty = characters[char_num].newy;
-	characters[char_num].newx += characters[char_num].changex;
 	characters[char_num].newy -= characters[char_num].changey;		//this flips it so positive changey goes up on the screen
 }
 void Movedown(uint8_t char_num){	//moves down
@@ -1174,7 +1179,9 @@ void SysTick_Init(void){
 	// enable SysTick with core clock
   NVIC_ST_CTRL_R = 0x00000007;
 }
-	
+
+uint32_t airtime = 0;
+uint32_t sixtime = 0;
 void SysTick_Handler(void){
 	for(uint8_t fireball = 2; fireball < 13; fireball++){
 			if(characters[fireball].status == alive){
@@ -1201,6 +1208,31 @@ void SysTick_Handler(void){
 				}
 			}
 		}
+		if(characters[mario].movement==jumping){
+			if(airtime<8){
+				airtime++;
+				characters[mario].changey =2;
+			}
+			if (airtime==8){
+				if(sixtime<7){				//so he is at the peak for a little bit
+					sixtime++;
+					characters[mario].changey =0;
+				}
+				else{
+					sixtime=0;
+					airtime++;
+				}
+			}
+			if(airtime>8){
+				airtime++;
+				characters[mario].changey =-2;
+			}
+			if((airtime!=0)&&(characters[mario].newy>characters[mario].miny)){
+				characters[mario].newy = characters[mario].miny;
+				airtime=0;
+				characters[mario].movement=still;
+			}
+		}
 			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
 		Move(mario);
 		//checks if mario is on platform
@@ -1221,6 +1253,13 @@ void SysTick_Handler(void){
 		for(uint8_t fireball = 2; fireball < 13; fireball++){
 			fireball_collision(fireball);
 		}
+}
+
+void GPIOPortF_Handler(void){
+  if((GPIO_PORTF_RIS_R&0X10)!=0){
+		characters[mario].movement=jumping;
+	}
+	GPIO_PORTF_ICR_R = 0x11;      // acknowledge flag4
 }
 
 void Delay100ms(uint32_t count){
