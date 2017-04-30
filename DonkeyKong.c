@@ -421,7 +421,7 @@ coordinates player_ladders_bottom[12]={
 	{20,151},{22,151},																//row1
 	{44,118},{46,118},{90,117},{92,117},						//row2
 	{18,88},{20,88},																//row3
-	{102,63},{104,62},															//row4
+	{102,61},{104,60},															//row4
 	{70,34},{72,34}																	//row5
 };
 coordinates enemy_ladders_top[24]={
@@ -460,7 +460,7 @@ void PortF_Init(void);
 uint32_t  x_ADC_In(void);
 uint32_t  y_ADC_In(void);
 
-
+uint32_t difficulty = 100;
 uint8_t fireball_wait = 0;	//delay for next fireball
 uint8_t fireball_ref = 2;	//reference to which fireball
 int main(void){
@@ -825,18 +825,18 @@ void mario_platform_left(void){
 	//first row
 	if(characters[mario].newx == 72){
 			for( uint8_t y = 158; y > 124; y--){
-				if(characters[mario].newy==y){	
+				if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 					characters[mario].pasty = characters[mario].newy;
-					characters[mario].miny--;
+					characters[mario].miny=152;
 					break;
 				}
 			}
 		}
 	if(characters[mario].newx == 36){
 		for( uint8_t y = 158; y > 125; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=151;
 				break;
 			}
 		}
@@ -844,27 +844,27 @@ void mario_platform_left(void){
 	//second row
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 123; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=119;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 72){
 		for( uint8_t y = 122; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=118;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 102){
 		for( uint8_t y = 121; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=117;
 				break;
 			}
 		}
@@ -872,27 +872,27 @@ void mario_platform_left(void){
 	//third row
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 96; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=90;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 60){
 		for( uint8_t y = 95; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=89;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 30){
 		for( uint8_t y = 94; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=88;
 				break;
 			}
 		}
@@ -900,27 +900,27 @@ void mario_platform_left(void){
 	//fourth row
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 67; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=63;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 72){
 		for( uint8_t y = 66; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=62;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 102){
 		for( uint8_t y = 65; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=61;
 				break;
 			}
 		}
@@ -928,18 +928,18 @@ void mario_platform_left(void){
 	//fifth row
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 40; y > 22; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=34;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 60){
 		for( uint8_t y = 38; y > 22; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=33;
 				break;
 			}
 		}
@@ -950,18 +950,18 @@ void mario_platform_right(void){
 	//first row
 	if(characters[mario].newx == 72){
 			for( uint8_t y = 158; y > 124; y--){
-				if(characters[mario].newy==y){	
+				if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){		
 					characters[mario].pasty = characters[mario].newy;
-					characters[mario].miny++;
+					characters[mario].miny=153;
 					break;
 				}
 			}
 	}
 	if(characters[mario].newx == 36){
 		for( uint8_t y = 158; y > 125; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=152;
 				break;
 			}
 		}
@@ -969,27 +969,27 @@ void mario_platform_right(void){
 			//second row
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 123; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=118;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 72){
 		for( uint8_t y = 122; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=117;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 102){
 		for( uint8_t y = 121; y > 97; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=116;
 				break;
 			}
 		}
@@ -997,27 +997,27 @@ void mario_platform_right(void){
 	//third row
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 96; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=91;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 60){
 		for( uint8_t y = 95; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=90;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 30){
 		for( uint8_t y = 94; y > 69; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=89;
 				break;
 			}
 		}
@@ -1025,27 +1025,27 @@ void mario_platform_right(void){
 	//fourth row
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 67; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=62;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 72){
 		for( uint8_t y = 66; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=61;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 102){
 		for( uint8_t y = 65; y > 41; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny--;
+				characters[mario].miny=60;
 				break;
 			}
 		}
@@ -1053,18 +1053,18 @@ void mario_platform_right(void){
 	//fifth row
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 40; y > 22; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=35;
 				break;
 			}
 		}
 	}
 	if(characters[mario].newx == 60){
 		for( uint8_t y = 38; y > 22; y--){
-			if(characters[mario].newy==y){
+			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
-				characters[mario].miny++;
+				characters[mario].miny=34;
 				break;
 			}
 		}
@@ -1263,7 +1263,7 @@ void SysTick_Handler(void){
 			characters[mario].newy = characters[mario].miny;
 		}
 		fireball_wait++ ;
-		if(fireball_wait == 75){
+		if(fireball_wait == difficulty){
 			fireball_wait = 0;
 			fireball_ref = 2;
 			while(fireball_ref <12){
