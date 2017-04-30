@@ -464,6 +464,7 @@ void SysTick_Handler(void);
 void PortF_Init(void);
 uint32_t  x_ADC_In(void);
 uint32_t  y_ADC_In(void);
+void ST7735_FillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 
 uint32_t difficulty = 100;
 uint8_t fireball_wait = 0;	//delay for next fireball
@@ -490,7 +491,11 @@ int main(void){
 				}
 			}
 		}
-		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20); 
+		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty), 15, 1, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-19), 15, 1, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-18), 2, 20, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 2, 20, 0x7BEF);
+		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20);
 	}
 	ST7735_FillScreen(0);
 }
