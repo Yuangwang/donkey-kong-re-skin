@@ -466,7 +466,8 @@ uint32_t  x_ADC_In(void);
 uint32_t  y_ADC_In(void);
 void ST7735_FillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 
-uint32_t difficulty = 100;
+uint32_t start;
+uint32_t difficulty = 120;
 uint8_t fireball_wait = 0;	//delay for next fireball
 uint8_t fireball_ref = 2;	//reference to which fireball
 int main(void){
@@ -479,6 +480,7 @@ int main(void){
   ST7735_FillScreen(0x7BEF);            // set screen to black
 	draw_Stage1();
 	draw_init_characters();
+	start = 150;													//delay before mario can move
   while(!lose){
 	//fireballs fire one by one
 		draw_Stage1();	//layering stage behind mario
@@ -491,10 +493,10 @@ int main(void){
 				}
 			}
 		}
-		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty), 15, 1, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-19), 15, 1, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-18), 2, 20, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 2, 20, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-1), 15, 2, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-19), 15, 2, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx-1), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
+		ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
 		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20);
 	}
 	ST7735_FillScreen(0);
@@ -546,7 +548,7 @@ void update_Fire (uint8_t firenum){
 		if((characters[firenum].newx == enemy_ladders_top[i].x) && (characters[firenum].newy == enemy_ladders_top[i].y)){
 				uint32_t val1 = x_ADC_In()*1256;
 				Random_Init(NVIC_ST_CURRENT_R*val1);
-				if(Random() > 127){
+				if(Random() > 190){
 					Movedown(firenum);
 				}			
 		}
@@ -1266,7 +1268,12 @@ void SysTick_Handler(void){
 			}
 		}
 			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
-		Move(mario);
+		if(start!=0){
+			start--;
+		}
+		if(start==0){
+			Move(mario);
+		}
 		//checks if mario is on platform
 		if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
 			characters[mario].pasty = characters[mario].newy;
@@ -1287,9 +1294,9 @@ void SysTick_Handler(void){
 			}
 			characters[bowser].pic = bowser_open_mouth;
 		}
-//		for(uint8_t fireball = 2; fireball < 13; fireball++){
-//			fireball_collision(fireball);
-//		}
+		for(uint8_t fireball = 2; fireball < 13; fireball++){
+			fireball_collision(fireball);
+		}
 }
 
 void GPIOPortF_Handler(void){
