@@ -480,7 +480,7 @@ int main(void){
   ST7735_FillScreen(0x7BEF);            // set screen to black
 	draw_Stage1();
 	draw_init_characters();
-	start = 150;													//delay before mario can move
+	start = difficulty;													//delay before mario can move
   while(!lose){
 	//fireballs fire one by one
 		draw_Stage1();	//layering stage behind mario

@@ -23,7 +23,7 @@ I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (ST7735.h)(0x590538D1)
 I (tm4c123gh6pm.h)(0x590538D1)
 F (.\tm4c123gh6pm.h)(0x590538D1)()
-F (.\DonkeyKong.c)(0x59066D2F)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\donkeykong.o --omf_browse .\donkeykong.crf --depend .\donkeykong.d)
+F (.\DonkeyKong.c)(0x59066D80)(-c --cpu Cortex-M4 -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\.. --C99-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\donkeykong.o --omf_browse .\donkeykong.crf --depend .\donkeykong.d)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C88A34)
 I (tm4c123gh6pm.h)(0x590538D1)
 I (ST7735.h)(0x590538D1)
