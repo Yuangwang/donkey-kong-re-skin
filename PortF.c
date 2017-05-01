@@ -5,9 +5,11 @@
 #include "TExaS.h"
 #include "ADC.h"
 void PortF_Init(void){
-	SYSCTL_RCGC2_R |= 0x00000020; // (a) activate clock for port F
+	SYSCTL_RCGCGPIO_R |= 0x00000020; // (a) activate clock for port F
   volatile uint8_t FallingEdges = 0;             // (b) initialize count and wait for clock
-  GPIO_PORTF_DIR_R &= ~0x11;    // (c) make PF4 in (built-in button)
+  GPIO_PORTF_LOCK_R = 0x4C4F434B;
+	GPIO_PORTF_CR_R = 0x11;	
+	GPIO_PORTF_DIR_R &= ~0x11;    // (c) make PF4 in (built-in button)
   GPIO_PORTF_AFSEL_R &= ~0x11;  //     disable alt funct on PF4
   GPIO_PORTF_DEN_R |= 0x11;     //     enable digital I/O on PF4
   GPIO_PORTF_PCTL_R &= ~0x000F000F; //  configure PF4 as GPIO
