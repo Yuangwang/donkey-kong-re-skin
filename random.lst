@@ -78,8 +78,9 @@ ARM Macro Assembler    Page 2
               0019660D 
               3C6EF35F 
 Command Line: --debug --xref --cpu=Cortex-M4 --apcs=interwork --depend=.\random
-.d -o.\random.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\AR
-M\Inc\Luminary --list=.\random.lst random.s
+.d -o.\random.o -ID:\wei\Documents\ee319k\keil\ARM\RV31\INC -ID:\wei\Documents\
+ee319k\keil\ARM\CMSIS\Include -ID:\wei\Documents\ee319k\keil\ARM\Inc\Luminary -
+-list=.\random.lst random.s
 
 
 

@@ -465,6 +465,11 @@
               <FileType>1</FileType>
               <FilePath>.\DonkeyKong.c</FilePath>
             </File>
+            <File>
+              <FileName>PortF.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PortF.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

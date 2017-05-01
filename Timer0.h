@@ -20,7 +20,7 @@
  For more information about my classes, my research, and my books, see
  http://users.ece.utexas.edu/~valvano/
  */
-
+#include <stdint.h>
 #ifndef __TIMER0INTS_H__ // do not include more than once
 #define __TIMER0INTS_H__
 

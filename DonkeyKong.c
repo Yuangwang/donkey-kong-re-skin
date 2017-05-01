@@ -55,6 +55,10 @@
 #include "Random.h"
 #include "TExaS.h"
 #include "ADC.h"
+#include "Sound.h"
+#include "DAC.h"
+#include "Timer0.h"
+
 #define	 bowser 0
 #define  mario  1
 #define  fireball1  2
@@ -497,11 +501,13 @@ int main(void){
   start = difficulty;													//delay before mario can move
 	TExaS_Init();  // set system clock to 80 MHz
 	ADC_Init();
+	DAC_Init();
 	SysTick_Init();
 	PortF_Init();
 	EnableInterrupts();
   Output_Init();
 	while(characters[mario].lives>0){	
+		Sound_intro();
 		ST7735_FillScreen(0x7BEF);            // set screen to black
 		draw_Stage1();
 		draw_init_characters();
@@ -510,7 +516,6 @@ int main(void){
 		start=difficulty;
 		fireball_wait = 0;
 		while((!lose)&&(!win)){
-		//fireballs fire one by one
 			draw_Stage1();	//layering stage behind mario
 			ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
 			for(uint8_t fireball = 2; fireball < 12; fireball++){
@@ -533,9 +538,11 @@ int main(void){
 		if(win!=0){
 			level++;
 			score+=100;
+			Sound_points();
 		}
 		if(lose!=0){
 			characters[mario].lives--;
+			Sound_gameover();
 		}
 		ST7735_FillScreen(0);            // set screen to black
 		ST7735_SetCursor(0,0);
@@ -622,7 +629,7 @@ void Moveup(uint8_t char_num){	//moves down
 void fireball_collision(uint8_t firenum){
 	for(uint8_t x = characters[firenum].newx; x < (characters[firenum].newx + 8); x++){
 		for(uint8_t y = characters[firenum].newy; y > (characters[firenum].newy -8); y--){
-			if(((characters[mario].newx == x)||((characters[mario].newx + 14) == x)) && ((characters[mario].newy == y)||(characters[mario].newy == (y+1))||(characters[mario].newy == (y-1)))){
+			if(((characters[mario].newx == x)||((characters[mario].newx + 14) == x)) && ((characters[mario].newy == y)||(characters[mario].newy + 10 == y)||(characters[mario].newy + 20 == y))){
 				ST7735_FillScreen(0x0000);	//replace with game over screen
 				lose = 1;
 			}
@@ -1296,7 +1303,7 @@ void SysTick_Init(void){
 	NVIC_ST_CTRL_R = 0;                   // disable SysTick during setup
   NVIC_ST_RELOAD_R = NVIC_ST_RELOAD;  // maximum reload value
   NVIC_ST_CURRENT_R = 0;                // any write to current clears it
-  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0X00FFFFFF)|0X40000000; //priority 2
+  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0X00FFFFFF)|0X80000000; //priority 2
 	// enable SysTick with core clock
   NVIC_ST_CTRL_R = 0x00000007;
 }
@@ -1335,6 +1342,9 @@ void SysTick_Handler(void){
 				}
 			}
 			if(characters[mario].movement==jumping){
+				if(airtime == 1){
+					Sound_Jump();
+				}
 				if(airtime<9){
 					airtime++;
 					characters[mario].changey =2;
@@ -1396,6 +1406,7 @@ void GPIOPortF_Handler(void){
 	}
 	if((GPIO_PORTF_RIS_R&0X01)!=0){
 		pause = !pause;
+		Sound_pause();
 	}
 	GPIO_PORTF_ICR_R = 0x11;      // acknowledge flag4
 }
