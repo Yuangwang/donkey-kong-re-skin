@@ -157,7 +157,7 @@ ARM Macro Assembler    Page 3
   120 000000D2 F000 F812       BL               OutDig      ;ones place
   121 000000D6         
   122 000000D6 E92D 480F       PUSH             {R0-R3,R11,LR}
-  123 000000DA F04F 002E       MOV              R0, #0X2E   ;decimal
+  123 000000DA F04F 002C       MOV              R0, #0X2C   ;decimal
   124 000000DE F7FF FFFE       BL               ST7735_OutChar
   125 000000E2 E8BD 480F       POP              {R0-R3,R11,LR}
   126 000000E6         

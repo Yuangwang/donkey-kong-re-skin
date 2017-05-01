@@ -120,7 +120,7 @@ LCD_OutFix
 	BL		OutDig				;ones place
 	
 	PUSH	{R0-R3,R11,LR}
-	MOV		R0, #0X2E			;decimal
+	MOV		R0, #0X2C			;decimal
 	BL		ST7735_OutChar
 	POP		{R0-R3,R11,LR}
 

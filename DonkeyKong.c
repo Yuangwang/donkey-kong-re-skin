@@ -392,16 +392,17 @@ typedef struct charac{
 	int8_t changex;
 	int8_t changey;
 	uint32_t miny;
+	uint8_t lives;
 } character;
 typedef struct coord{
 	uint32_t x;
 	uint32_t y;
 } coordinates;
-uint8_t lose = 0;
+
 //*******************Character Status***************************************
 character characters[character_size] = {																	//this array has all of the characters in the game
 	{bowser_closed_mouth,open,still,right,5,32,5,32,0,0},				//bowser status
-	{mario_still_left,alive,still,right,108,153,108,153,0,0,153},		//mario status
+	{mario_still_left,alive,still,left,108,153,108,153,0,0,153,3},		//mario status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 1 status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 2 status
 	{fireball_right,dead,walking,right,30,20,30,20,1,1},		//fireball 3 status
@@ -444,6 +445,16 @@ coordinates player_ladders_top[12]={
 	{70,17},{72,17}
 };
 
+char score_text[16] = {
+	'Y','o','u','r',' ','S','c','o','r','e',' ','I','s',':',' ',0
+};
+char level_text[16] = {
+	'Y','o','u','r',' ','L','e','v','e','l',' ','I','s',':',' ',0
+};
+char lives_text[13] = {
+	'Y','o','u','r',' ','L','i','v','e','s',':',' ',0
+};
+
 //function declarations
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -465,42 +476,105 @@ void PortF_Init(void);
 uint32_t  x_ADC_In(void);
 uint32_t  y_ADC_In(void);
 void ST7735_FillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
+void ST7735_DrawCharS(int16_t x, int16_t y, char c, int16_t textColor, int16_t bgColor, uint8_t size);
+uint32_t ST7735_DrawString(uint16_t x, uint16_t y, char *pt, int16_t textColor);
+void Characters_Init(void);
 
-uint32_t start;
+uint32_t score=0;
+uint8_t won_whole_game;
+uint16_t level = 1;
+uint8_t lose = 0;
+uint8_t win = 0;
+uint8_t pause;
 uint32_t difficulty = 120;
+uint32_t start;
 uint8_t fireball_wait = 0;	//delay for next fireball
 uint8_t fireball_ref = 2;	//reference to which fireball
 int main(void){
-  TExaS_Init();  // set system clock to 80 MHz
+  start = difficulty;													//delay before mario can move
+	TExaS_Init();  // set system clock to 80 MHz
 	ADC_Init();
 	SysTick_Init();
 	PortF_Init();
 	EnableInterrupts();
   Output_Init();
-  ST7735_FillScreen(0x7BEF);            // set screen to black
-	draw_Stage1();
-	draw_init_characters();
-	start = difficulty;													//delay before mario can move
-  while(!lose){
-	//fireballs fire one by one
-		draw_Stage1();	//layering stage behind mario
-		ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
-		for(uint8_t fireball = 2; fireball < 12; fireball++){
-			if(characters[fireball].status == alive){
-				ST7735_DrawBitmap(characters[fireball].newx, characters[fireball].newy, characters[fireball].pic, 10,10);
-				if(characters[fireball].newx==126){
-					characters[fireball].status=dead;
+	while(characters[mario].lives>0){	
+		ST7735_FillScreen(0x7BEF);            // set screen to black
+		draw_Stage1();
+		draw_init_characters();
+		win=0;
+		lose=0;
+		start=difficulty;
+		fireball_wait = 0;
+		while((!lose)&&(!win)){
+		//fireballs fire one by one
+			draw_Stage1();	//layering stage behind mario
+			ST7735_DrawBitmap(characters[bowser].newx, characters[bowser].newy, characters[bowser].pic, 31,31);
+			for(uint8_t fireball = 2; fireball < 12; fireball++){
+				if(characters[fireball].status == alive){
+					ST7735_DrawBitmap(characters[fireball].newx, characters[fireball].newy, characters[fireball].pic, 10,10);
+					if(characters[fireball].newx==126){
+						characters[fireball].status=dead;
+					}
 				}
 			}
+			ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-1), 15, 2, 0x7BEF);
+			ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-19), 15, 2, 0x7BEF);
+			ST7735_FillRect((int16_t)(characters[mario].pastx-1), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
+			ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
+			ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20);
+			if(characters[mario].newy==17){
+				win = 1;
+			}
 		}
-		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-1), 15, 2, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx), (int16_t)(characters[mario].pasty-19), 15, 2, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx-1), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
-		ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
-		ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20);
+		ST7735_FillScreen(0);            // set screen to black
+		ST7735_SetCursor(0,0);
+		ST7735_DrawString(0,0, &level_text[0], 0xFFFF);
+		ST7735_DrawString(0,2, &lives_text[0], 0xFFFF);
+		ST7735_DrawString(0,4, &score_text[0], 0xFFFF);
+		Delay100ms(50);
+		if(win!=0){
+			if(difficulty>10){
+				difficulty-=10;
+				level++;
+				score+=100;
+			}
+		}
+		if(lose!=0){
+			characters[mario].lives--;
+		}
+		Characters_Init();
 	}
+	//once you lose all lives
 	ST7735_FillScreen(0);
 }
+
+void Characters_Init(void){
+	characters[mario].newx= 108;
+	characters[mario].pastx = 108;
+	characters[mario].newy=	153;
+	characters[mario].pasty = 153;
+	characters[mario].changex=
+	characters[mario].changey = 0;
+	characters[mario].miny=153;
+	characters[mario].status=alive;
+	characters[mario].pic=mario_still_left;
+	characters[mario].movement=still;
+	characters[mario].direction=left;
+	for(uint32_t i = 2;i<13;i++){	
+		characters[i].pic=fireball_right;
+		characters[i].status=dead;
+		characters[i].newx=30;
+		characters[i].pastx=30;
+		characters[i].newy=20;
+		characters[i].pasty=20;
+		characters[i].changex=1;
+		characters[i].changey=1;
+		characters[i].direction=right;
+		characters[i].movement=walking;
+	}
+}
+
 void Move(uint8_t char_num){
 	if(((characters[char_num].newx + characters[char_num].changex)<113)&&((characters[char_num].newx + characters[char_num].changex)>0)){
 		characters[char_num].pastx = characters[char_num].newx;
@@ -755,7 +829,7 @@ uint32_t xADCvalue;
 	uint32_t yADCvalue;
 //movement controls for mario
 void checkADC (void){
-	if(start==0){
+	if(start==0&&(lose==0)&&(win==0)){
 		xADCvalue = x_ADC_In();
 		yADCvalue = y_ADC_In();
 		if((xADCvalue<=3000)&&(xADCvalue>=1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
@@ -1215,93 +1289,98 @@ void SysTick_Init(void){
 uint32_t airtime = 0;
 uint32_t sixtime = 0;
 void SysTick_Handler(void){
-	for(uint8_t fireball = 2; fireball < 13; fireball++){
-			if(characters[fireball].status == alive){
-				update_Fire(fireball);
-			}
-		}
-	checkADC();		
-		if(characters[mario].movement==climbing_up){
-			for(uint16_t i=0;i<18;i++){
-				if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
-					characters[mario].movement = still;
-					characters[mario].changey = 0;
-					characters[mario].miny = player_ladders_top[i].y;
-					characters[mario].pic = mario_still_right;
-					break;
-				}
-				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
-			}
-		}
-		if(characters[mario].movement==climbing_down){
-			for(uint16_t i=0;i<18;i++){
-				if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
-					characters[mario].movement = still;
-					characters[mario].changey = 0;
-					characters[mario].miny = player_ladders_bottom[i].y;
-					characters[mario].pic = mario_still_right;
-					break;
-				}
-			}
-		}
-		if(characters[mario].movement==jumping){
-			if(airtime<8){
-				airtime++;
-				characters[mario].changey =2;
-			}
-			if (airtime==8){
-				if(sixtime<8){				//so he is at the peak for a little bit
-					sixtime++;
-					characters[mario].changey =0;
-				}
-				else{
-					sixtime=0;
-					airtime++;
-				}
-			}
-			if(airtime>8){
-				airtime++;
-				characters[mario].changey =-2;
-			}
-			if((airtime!=0)&&(characters[mario].newy>characters[mario].miny)){
-				characters[mario].newy = characters[mario].miny;
-				airtime=0;
-				characters[mario].movement=still;
-			}
-		}
-			//if he is still no the ladder do nothing because check ADC() changes changex and changey values
-		if(start!=0){
-			start--;
-		}
-		Move(mario);
-		//checks if mario is on platform
-		if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
-			characters[mario].pasty = characters[mario].newy;
-			characters[mario].newy = characters[mario].miny;
-		}
-		fireball_wait++ ;
-		if(fireball_wait == difficulty){
-			fireball_wait = 0;
-			fireball_ref = 2;
-			while(fireball_ref <12){
-				if(characters[fireball_ref].status==dead){
-					characters[fireball_ref].status = alive;
-					characters[fireball_ref].newx = 30;
-					characters[fireball_ref].newy = 20;
-					break;
-				}
-				fireball_ref++;
-			}
-			characters[bowser].pic = bowser_open_mouth;
-		}
+	if((pause==0)&&(lose==0)&&(win==0)){	
 		for(uint8_t fireball = 2; fireball < 13; fireball++){
-			fireball_collision(fireball);
+				if(characters[fireball].status == alive){
+					update_Fire(fireball);
+				}
+			}
+		checkADC();		
+			if(characters[mario].movement==climbing_up){
+				for(uint16_t i=0;i<18;i++){
+					if((characters[mario].newx==player_ladders_top[i].x)&&(characters[mario].newy==player_ladders_top[i].y)){
+						characters[mario].movement = still;
+						characters[mario].changey = 0;
+						characters[mario].miny = player_ladders_top[i].y;
+						characters[mario].pic = mario_still_right;
+						break;
+					}
+					//if he is still no the ladder do nothing because check ADC() changes changex and changey values
+				}
+			}
+			if(characters[mario].movement==climbing_down){
+				for(uint16_t i=0;i<18;i++){
+					if((characters[mario].newx==player_ladders_bottom[i].x)&&(characters[mario].newy==player_ladders_bottom[i].y)){
+						characters[mario].movement = still;
+						characters[mario].changey = 0;
+						characters[mario].miny = player_ladders_bottom[i].y;
+						characters[mario].pic = mario_still_right;
+						break;
+					}
+				}
+			}
+			if(characters[mario].movement==jumping){
+				if(airtime<9){
+					airtime++;
+					characters[mario].changey =2;
+				}
+				if (airtime==9){
+					if(sixtime<8){				//so he is at the peak for a little bit
+						sixtime++;
+						characters[mario].changey =0;
+					}
+					else{
+						sixtime=0;
+						airtime++;
+					}
+				}
+				if(airtime>9){
+					airtime++;
+					characters[mario].changey =-2;
+				}
+				if((airtime!=0)&&(characters[mario].newy>characters[mario].miny)){
+					characters[mario].newy = characters[mario].miny;
+					airtime=0;
+					characters[mario].movement=still;
+				}
+			}
+				//if he is still no the ladder do nothing because check ADC() changes changex and changey values
+			if(start!=0){
+				start--;
+			}
+			Move(mario);
+			//checks if mario is on platform
+			if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
+				characters[mario].pasty = characters[mario].newy;
+				characters[mario].newy = characters[mario].miny;
+			}
+			fireball_wait++ ;
+			if(fireball_wait == difficulty){
+				fireball_wait = 0;
+				fireball_ref = 2;
+				while(fireball_ref <12){
+					if(characters[fireball_ref].status==dead){
+						characters[fireball_ref].status = alive;
+						characters[fireball_ref].newx = 30;
+						characters[fireball_ref].newy = 20;
+						break;
+					}
+					fireball_ref++;
+				}
+				characters[bowser].pic = bowser_open_mouth;
+			}
+			for(uint8_t fireball = 2; fireball < 13; fireball++){
+				fireball_collision(fireball);
+			}
 		}
 }
 
 void GPIOPortF_Handler(void){
-  if((GPIO_PORTF_RIS_R&0X10)!=0){
+  if(((GPIO_PORTF_RIS_R&0X10)!=0)&&(pause==0)&&(start==0)){
 		characters[mario].movement=jumping;
+	}
+	if((GPIO_PORTF_RIS_R&0X01)!=0){
+		pause = !pause;
 	}
 	GPIO_PORTF_ICR_R = 0x11;      // acknowledge flag4
 }
@@ -1309,8 +1388,8 @@ void GPIOPortF_Handler(void){
 void Delay100ms(uint32_t count){
 	uint32_t volatile time;
   while(count>0){
-    //time = 227240;  // delay for board
-		time = 27240;	// delay for sim
+    time = 227240;  // delay for board
+		//time = 27240;	// delay for sim
     while(time){
 	  	time--;
     }
