@@ -454,6 +454,9 @@ char level_text[16] = {
 char lives_text[13] = {
 	'Y','o','u','r',' ','L','i','v','e','s',':',' ',0
 };
+char score_string[5]={0,0,0,0,0};
+char level_string[3]={0,0,0};
+char lives_string[2]={0,0};
 
 //function declarations
 void DisableInterrupts(void); // Disable interrupts
@@ -527,21 +530,33 @@ int main(void){
 				win = 1;
 			}
 		}
-		ST7735_FillScreen(0);            // set screen to black
-		ST7735_SetCursor(0,0);
-		ST7735_DrawString(0,0, &level_text[0], 0xFFFF);
-		ST7735_DrawString(0,2, &lives_text[0], 0xFFFF);
-		ST7735_DrawString(0,4, &score_text[0], 0xFFFF);
-		Delay100ms(50);
 		if(win!=0){
-			if(difficulty>10){
-				difficulty-=10;
-				level++;
-				score+=100;
-			}
+			level++;
+			score+=100;
 		}
 		if(lose!=0){
 			characters[mario].lives--;
+		}
+		ST7735_FillScreen(0);            // set screen to black
+		ST7735_SetCursor(0,0);
+		lives_string[0]=characters[mario].lives+0x30;
+		level_string[0]=(level/10)+0x30;
+		level_string[1]=(level%10)+0x30;
+//		score_string[0]=(score/1000)+0x30;
+//		score_string[1]=((score%1000)/100)+0x30;
+//		uint32_t score_value=score/1000;
+//		uint32_t score_copy = score-score_value;
+		ST7735_DrawString(0,0, &level_text[0], 0xFFFF);
+		ST7735_DrawString(15,0, &level_string[0], 0xFFFF);
+		ST7735_DrawString(0,2, &lives_text[0], 0xFFFF);
+		ST7735_DrawString(12,2, &lives_string[0], 0xFFFF);
+		ST7735_DrawString(0,4, &score_text[0], 0xFFFF);
+		ST7735_DrawString(13,4, &score_string[0], 0xFFFF);
+		Delay100ms(100);
+		if(win!=0){
+			if(difficulty>10){
+				difficulty-=10;
+			}
 		}
 		Characters_Init();
 	}
