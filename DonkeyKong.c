@@ -1467,7 +1467,7 @@ void GPIOPortF_Handler(void){
 		pause = !pause;
 		Sound_pause();
 	}
-	GPIO_PORTF_ICR_R = 0x11;      // acknowledge flag4
+	GPIO_PORTF_ICR_R = 0x11;      // acknowledge flag4 
 }
 
 void Delay100ms(uint32_t count){
