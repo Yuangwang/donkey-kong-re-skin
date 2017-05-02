@@ -458,7 +458,16 @@ char level_text[16] = {
 char lives_text[13] = {
 	'Y','o','u','r',' ','L','i','v','e','s',':',' ',0
 };
-char score_string[5]={0,0,0,0,0};
+char lose_text[9] = {
+	'Y','o','u',' ','L','o','s','e',0
+};
+char final_level_text[19] = {
+	'F','i','n','a','l',' ','L','e','v','e','l',':',' ',0
+};
+char final_score_text[19] = {
+	'F','i','n','a','l',' ','S','c','o','r','e',':',' ',0
+};
+char score_string[5]={0,0,0x30,0x30,0};
 char level_string[3]={0,0,0};
 char lives_string[2]={0,0};
 
@@ -549,16 +558,14 @@ int main(void){
 		lives_string[0]=characters[mario].lives+0x30;
 		level_string[0]=(level/10)+0x30;
 		level_string[1]=(level%10)+0x30;
-//		score_string[0]=(score/1000)+0x30;
-//		score_string[1]=((score%1000)/100)+0x30;
-//		uint32_t score_value=score/1000;
-//		uint32_t score_copy = score-score_value;
+		score_string[0]=(score/1000)+0x30;
+		score_string[1]=((score%1000)/100)+0x30;
 		ST7735_DrawString(0,0, &level_text[0], 0xFFFF);
 		ST7735_DrawString(15,0, &level_string[0], 0xFFFF);
 		ST7735_DrawString(0,2, &lives_text[0], 0xFFFF);
 		ST7735_DrawString(12,2, &lives_string[0], 0xFFFF);
 		ST7735_DrawString(0,4, &score_text[0], 0xFFFF);
-		ST7735_DrawString(13,4, &score_string[0], 0xFFFF);
+		ST7735_DrawString(15,4, &score_string[0], 0xFFFF);
 		Delay100ms(100);
 		if(win!=0){
 			if(difficulty>10){
@@ -569,6 +576,11 @@ int main(void){
 	}
 	//once you lose all lives
 	ST7735_FillScreen(0);
+	ST7735_DrawString(0,1, &lose_text[0], 0xFFFF);
+	ST7735_DrawString(0,3, &final_level_text[0], 0xFFFF);
+	ST7735_DrawString(14,3, &level_string[0], 0xFFFF);
+	ST7735_DrawString(0,5, &final_score_text[0], 0xFFFF);
+	ST7735_DrawString(14,5, &score_string[0], 0xFFFF);
 }
 
 void Characters_Init(void){
