@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\DonkeyKong.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\DonkeyKong.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon May 01 20:10:48 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Mon May 01 22:16:14 2017
 <BR><P>
 <H3>Maximum Stack Usage =        152 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1068,7 +1068,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 626 bytes, Stack size 8 bytes, donkeykong.o(i.SysTick_Handler))
+<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 674 bytes, Stack size 8 bytes, donkeykong.o(i.SysTick_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = SysTick_Handler &rArr; fireball_collision &rArr; ST7735_FillScreen &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
@@ -1102,7 +1102,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[b2]"></a>checkADC</STRONG> (Thumb, 548 bytes, Stack size 8 bytes, donkeykong.o(i.checkADC))
+<P><STRONG><a name="[b2]"></a>checkADC</STRONG> (Thumb, 568 bytes, Stack size 8 bytes, donkeykong.o(i.checkADC))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = checkADC
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mario_platform_right
@@ -1177,11 +1177,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[b7]"></a>mario_platform_left</STRONG> (Thumb, 782 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_left))
+<P><STRONG><a name="[b7]"></a>mario_platform_left</STRONG> (Thumb, 882 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_left))
 <BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 
-<P><STRONG><a name="[b8]"></a>mario_platform_right</STRONG> (Thumb, 782 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_right))
+<P><STRONG><a name="[b8]"></a>mario_platform_right</STRONG> (Thumb, 882 bytes, Stack size 0 bytes, donkeykong.o(i.mario_platform_right))
 <BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkADC
 </UL>
 

@@ -382,7 +382,7 @@ const unsigned short mario_climbing_2[] = {
 
 //**********************Character Status Typedef****************************
 typedef enum {dead,alive,open,closed} state;
-typedef enum {still,walking,jumping,climbing_up,climbing_down} moving;
+typedef enum {still,walking,jumping,climbing_up,climbing_down,falling} moving;
 typedef enum {left,right} direct;
 typedef struct charac{
 	const unsigned short *pic;
@@ -506,6 +506,7 @@ uint32_t difficulty = 120;
 uint32_t start;
 uint8_t fireball_wait = 0;	//delay for next fireball
 uint8_t fireball_ref = 2;	//reference to which fireball
+uint32_t airtime = 0;
 int main(void){
   start = difficulty;													//delay before mario can move
 	TExaS_Init();  // set system clock to 80 MHz
@@ -863,7 +864,7 @@ uint32_t xADCvalue;
 	uint32_t yADCvalue;
 //movement controls for mario
 void checkADC (void){
-	if(start==0&&(lose==0)&&(win==0)){
+	if(start==0&&(lose==0)&&(win==0)&&(characters[mario].movement!=falling)){
 		xADCvalue = x_ADC_In();
 		yADCvalue = y_ADC_In();
 		if((xADCvalue<=3000)&&(xADCvalue>=1000)&&(characters[mario].movement!=climbing_down)&&(characters[mario].movement!=climbing_up)){
@@ -895,7 +896,7 @@ void checkADC (void){
 			}
 			mario_platform_right();
 		}	
-		if((yADCvalue<3000)&&(yADCvalue>1000)){
+		if((yADCvalue<3000)&&(yADCvalue>1000)&&(characters[mario].movement!=falling)){
 			characters[mario].changey = 0;
 		}
 		if(yADCvalue<1000){
@@ -964,6 +965,16 @@ void mario_platform_left(void){
 		}
 	}
 	//second row
+	if(characters[mario].newx<3){
+		for( uint8_t y = 123; y > 113; y--){
+			if(characters[mario].newy==y){	
+				characters[mario].changey=-2;
+				characters[mario].miny=151;
+				characters[mario].movement = falling;
+				break;
+			}
+		}
+	}
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 123; y > 97; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
@@ -1020,6 +1031,16 @@ void mario_platform_left(void){
 		}
 	}
 	//fourth row
+	if(characters[mario].newx<3){
+		for( uint8_t y = 67; y > 57; y--){
+			if(characters[mario].newy==y){	
+				characters[mario].changey=-2;
+				characters[mario].miny=88;
+				characters[mario].movement = falling;
+				break;
+			}
+		}
+	}
 	if(characters[mario].newx == 42){
 		for( uint8_t y = 67; y > 41; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
@@ -1049,7 +1070,7 @@ void mario_platform_left(void){
 	}
 	//fifth row
 	if(characters[mario].newx == 90){
-		for( uint8_t y = 40; y > 22; y--){
+		for( uint8_t y = 40; y > 17; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
 				characters[mario].miny=34;
@@ -1058,7 +1079,7 @@ void mario_platform_left(void){
 		}
 	}
 	if(characters[mario].newx == 60){
-		for( uint8_t y = 38; y > 22; y--){
+		for( uint8_t y = 38; y > 17; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
 				characters[mario].pasty = characters[mario].newy;
 				characters[mario].miny=33;
@@ -1117,6 +1138,16 @@ void mario_platform_right(void){
 		}
 	}
 	//third row
+	if(characters[mario].newx>111){
+		for( uint8_t y = 96; y > 88; y--){
+			if(characters[mario].newy==y){	
+				characters[mario].changey=-2;
+				characters[mario].miny=116;
+				characters[mario].movement = falling;
+				break;
+			}
+		}
+	}
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 96; y > 69; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
@@ -1173,6 +1204,16 @@ void mario_platform_right(void){
 		}
 	}
 	//fifth row
+	if(characters[mario].newx>111){
+		for( uint8_t y = 35; y > 32; y--){
+			if(characters[mario].newy==y){	
+				characters[mario].changey=-2;
+				characters[mario].miny=60;
+				characters[mario].movement = falling;
+				break;
+			}
+		}
+	}
 	if(characters[mario].newx == 90){
 		for( uint8_t y = 40; y > 22; y--){
 			if((characters[mario].newy==y)&&(characters[mario].pastx!=(characters[mario].newx+characters[mario].changex))){	
@@ -1320,7 +1361,7 @@ void SysTick_Init(void){
   NVIC_ST_CTRL_R = 0x00000007;
 }
 
-uint32_t airtime = 0;
+
 uint32_t sixtime = 0;
 void SysTick_Handler(void){
 	if((pause==0)&&(lose==0)&&(win==0)){	
@@ -1351,6 +1392,13 @@ void SysTick_Handler(void){
 						characters[mario].pic = mario_still_right;
 						break;
 					}
+				}
+			}
+			if(characters[mario].movement==falling){
+					characters[mario].changey =-2;
+				if(characters[mario].newy>characters[mario].miny){
+					characters[mario].newy = characters[mario].miny;
+					lose = 1;
 				}
 			}
 			if(characters[mario].movement==jumping){
@@ -1387,7 +1435,7 @@ void SysTick_Handler(void){
 			}
 			Move(mario);
 			//checks if mario is on platform
-			if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)){
+			if((characters[mario].miny!=characters[mario].newy)&&(characters[mario].movement != jumping)&&(characters[mario].movement != climbing_up)&&(characters[mario].movement != climbing_down)&&(characters[mario].movement != falling)){
 				characters[mario].pasty = characters[mario].newy;
 				characters[mario].newy = characters[mario].miny;
 			}
@@ -1395,7 +1443,7 @@ void SysTick_Handler(void){
 			if(fireball_wait == difficulty){
 				fireball_wait = 0;
 				fireball_ref = 2;
-				while(fireball_ref <12){
+				while(fireball_ref <13){
 					if(characters[fireball_ref].status==dead){
 						characters[fireball_ref].status = alive;
 						characters[fireball_ref].newx = 30;
@@ -1409,9 +1457,8 @@ void SysTick_Handler(void){
 			for(uint8_t fireball = 2; fireball < 13; fireball++){
 				fireball_collision(fireball);
 			}
-		}
+	}
 }
-
 void GPIOPortF_Handler(void){
   if(((GPIO_PORTF_RIS_R&0X10)!=0)&&(pause==0)&&(start==0)){
 		characters[mario].movement=jumping;
