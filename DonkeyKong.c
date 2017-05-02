@@ -531,7 +531,7 @@ int main(void){
 			ST7735_FillRect((int16_t)(characters[mario].pastx-1), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
 			ST7735_FillRect((int16_t)(characters[mario].pastx+13), (int16_t)(characters[mario].pasty-18), 3, 20, 0x7BEF);
 			ST7735_DrawBitmap(characters[mario].newx, characters[mario].newy, characters[mario].pic, 15,20);
-			if(characters[mario].newy==17){
+			if(characters[mario].newy==17){  
 				win = 1;
 			}
 		}
@@ -629,7 +629,7 @@ void Moveup(uint8_t char_num){	//moves down
 void fireball_collision(uint8_t firenum){
 	for(uint8_t x = characters[firenum].newx; x < (characters[firenum].newx + 8); x++){
 		for(uint8_t y = characters[firenum].newy; y > (characters[firenum].newy -8); y--){
-			if(((characters[mario].newx == x)||((characters[mario].newx + 14) == x)) && ((characters[mario].newy == y)||(characters[mario].newy + 10 == y)||(characters[mario].newy + 20 == y))){
+			if(((characters[mario].newx == x)||((characters[mario].newx + 14) == x)) && ((characters[mario].newy == y)||(characters[mario].newy == (y+1))||(characters[mario].newy== (y-1)))){
 				ST7735_FillScreen(0x0000);	//replace with game over screen
 				lose = 1;
 			}

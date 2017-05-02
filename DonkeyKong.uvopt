@@ -292,7 +292,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>268</TopLine>
+      <TopLine>269</TopLine>
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\startup.s</PathWithFileName>
@@ -404,7 +404,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>93</TopLine>
+      <TopLine>94</TopLine>
       <CurrentLine>108</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\LCD.s</PathWithFileName>
@@ -436,7 +436,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
+      <TopLine>473</TopLine>
       <CurrentLine>488</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ST7735.c</PathWithFileName>
@@ -466,10 +466,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>59</ColumnNumber>
+      <ColumnNumber>172</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>509</TopLine>
-      <CurrentLine>521</CurrentLine>
+      <TopLine>616</TopLine>
+      <CurrentLine>632</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\DonkeyKong.c</PathWithFileName>
       <FilenameWithoutPath>DonkeyKong.c</FilenameWithoutPath>
