@@ -10,5 +10,7 @@ Adafruit Lcd Screen ST7735R
 Headphone Jack
 
 Microcontroller ports used are described in the project
+
 Drivers for hardware are also included in the project
+
 Hardware must be assembled by user
