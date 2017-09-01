@@ -1,5 +1,11 @@
-## EE319K - Introduction to Embedded Systems - Lab 10
+# Classic Donkey-Kong reskinned to be be Bowser vs. Mario
+This game is a remake of the game Donkey-Kong that is deseigned to work with a Tiva Launchpad. The game features a scoring system, progressive difficulty and 6-bit audio .
+## Necessary hardware
+Tiva Luanchpad TM4C123G
+Thumb Joystick
+Adafruit Lcd Screen ST7735R
+Headphone Jack
 
-Find the lab description at link below :
-
-https://docs.google.com/document/d/1s3uQowkEjTSlR0_45svptQb7hqS1_2NCD9HRzErFIx0/edit
+Microcontroller ports used are described in the project
+Drivers for hardware are also included in the project
+Hardware must be assembled by user
